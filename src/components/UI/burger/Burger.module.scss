@@ -1,0 +1,39 @@
+.burger {
+   @apply relative h-[18px] w-8 cursor-pointer z-50;
+   &::before,
+   &::after {
+      @apply content-[''] absolute left-0 h-[2px] w-full
+      bg-darkBlue transition-all;
+   }
+   &::before {
+      @apply top-0;
+   }
+   &::after {
+      @apply bottom-0;
+   }
+   span {
+      @apply absolute top-1/2 left-0 h-[2px] w-full bg-darkBlue
+      -translate-y-1/2 scale-100 transition-all leading-none;
+   }
+   &._show {
+      span {
+         @apply scale-0;
+      }
+      &::before,
+      &::after {
+         @apply bg-white;
+      }
+      &::before {
+         @apply rotate-45 top-1/2 -translate-y-1/2;
+      }
+      &::after {
+         @apply -rotate-45 top-1/2 -translate-y-1/2;
+      }
+   }
+}
+
+@media (min-width: 900px) {
+   .burger {
+      @apply hidden;
+   }
+}

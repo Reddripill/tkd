@@ -1,0 +1,62 @@
+.header {
+   @apply w-full h-28 max-xl:h-20;
+}
+.wrapper {
+   @apply fixed left-0 top-0 z-20 w-full bg-white h-28 max-xl:h-20;
+}
+.header-container {
+   @apply w-full h-full flex items-center justify-between gap-x-5;
+}
+.label {
+   @apply max-w-[300px] overflow-hidden font-bold
+   text-lg leading-6 tracking-wide max-xl:hidden;
+}
+.menu-wrapper {
+   @apply flex items-center gap-x-8;
+   /* &::before {
+      @apply content-[''] fixed top-0 -left-full h-20 w-full
+      z-40 bg-white transition-all;
+   } */
+}
+.nav {
+   @apply flex flex-wrap items-center gap-x-5;
+}
+.item {
+   @apply py-1 relative text-base max-lg:text-sm;
+   &._active {
+      @apply font-bold;
+   }
+}
+.burger {
+   @apply cursor-pointer md:hidden transition-all;
+}
+.socials {
+   @apply flex items-center gap-x-2;
+}
+.button {
+   @apply bg-darkBlue text-white px-5 h-10 rounded-full
+   shadow-button transition-colors hover:bg-darkBlue/80 max-xl:h-8;
+}
+@media (max-width: 900px) {
+   .menu-wrapper {
+      &._active {
+         /* &::before {
+            @apply left-0;
+         } */
+         .menu {
+            @apply left-0;
+         }
+      }
+   }
+   .menu {
+      @apply fixed top-0 -left-full w-full h-full bg-black/80 z-30
+      transition-all py-5 px-[15px];
+   }
+   .nav {
+      @apply h-full w-full flex-col justify-center items-center
+      gap-y-2 flex-nowrap overflow-y-auto;
+   }
+   .item {
+      @apply text-white text-xl;
+   }
+}

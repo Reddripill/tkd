@@ -1,0 +1,42 @@
+.footer {
+   @apply bg-darkBlue py-20 max-lg:py-10;
+}
+.label {
+   @apply max-w-[300px] overflow-hidden font-bold text-white
+   text-base md:text-lg leading-6 tracking-wide;
+}
+.wrapper {
+   @apply lg:flex lg:items-start lg:gap-x-6 lg:flex-wrap;
+}
+.information {
+   display: grid;
+   flex-grow: 1;
+   column-gap: 80px;
+   grid-template-columns: repeat(2, 220px);
+}
+.menu {
+   @apply flex flex-col gap-y-2 max-md:mb-8;
+}
+
+.item {
+   @apply text-white text-base md:text-lg font-medium transition-all hover:underline;
+}
+.socials {
+   @apply flex items-center gap-x-4;
+}
+.icon {
+   @apply bg-lightBlue rounded-lg p-2;
+}
+@media (min-width: 1024px) {
+   .information {
+      justify-content: end;
+   }
+}
+@media (max-width: 768px) {
+   .information {
+      @apply block;
+   }
+}
+.text {
+   @apply text-white md:text-base text-sm;
+}
