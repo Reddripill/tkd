@@ -22,9 +22,7 @@ export default function RootLayout({
          <body className={inter.className}>
             <div className="w-full h-full flex flex-col">
                <Header />
-               <main className="flex-grow py-10 mt-28 max-xl:mt-20">
-                  {children}
-               </main>
+               <main className="flex-grow mt-28 max-xl:mt-20">{children}</main>
                <Footer />
             </div>
          </body>

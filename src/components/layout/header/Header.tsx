@@ -4,15 +4,23 @@ import { usePathname } from "next/navigation";
 import styles from "./Header.module.scss";
 import cn from "classnames";
 import Link from "next/link";
-import TgIcon from "../../UI/icons/TgIcon";
-import WhatsappIcon from "../../UI/icons/WhatsappIcon";
 import Burger from "../../UI/burger/Burger";
+/* import TgIcon from "../../UI/icons/TgIcon";
+import WhatsappIcon from "../../UI/icons/WhatsappIcon"; */
 
 const Header = () => {
    const [isShow, setIsShow] = useState(false);
    const pathname = usePathname();
    const closeMenu = () => {
       setIsShow(false);
+   };
+   const scrollToBottom = () => {
+      const top = document.body.scrollHeight;
+      closeMenu();
+      window.scroll({
+         top,
+         behavior: "smooth",
+      });
    };
    return (
       <header className={styles.header}>
@@ -71,13 +79,12 @@ const Header = () => {
                            >
                               Расписание
                            </Link>
-                           <Link
-                              href="/"
+                           <button
                               className={styles.item}
-                              onClick={closeMenu}
+                              onClick={scrollToBottom}
                            >
                               Контакты
-                           </Link>
+                           </button>
                         </nav>
                      </menu>
                      <Link href="/record">

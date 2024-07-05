@@ -7,7 +7,7 @@ import styles from "./News.module.scss";
 
 const News = () => {
    return (
-      <section>
+      <section className="section">
          <div className="container">
             <div className="title-h1">Актуальные новости</div>
             <Slider>

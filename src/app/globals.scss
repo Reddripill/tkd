@@ -12,3 +12,6 @@ body {
 .title-h1 {
    @apply text-black md:text-3xl text-2xl font-bold md:mb-8 mb-5;
 }
+.section {
+   @apply md:mb-16 mb-10;
+}

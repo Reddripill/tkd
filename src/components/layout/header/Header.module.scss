@@ -2,7 +2,7 @@
    @apply w-full h-28 max-xl:h-20;
 }
 .wrapper {
-   @apply fixed left-0 top-0 z-20 w-full bg-white h-28 max-xl:h-20;
+   @apply fixed left-0 top-0 z-50 w-full bg-white h-28 max-xl:h-20;
 }
 .header-container {
    @apply w-full h-full flex items-center justify-between gap-x-5;
@@ -22,7 +22,7 @@
    @apply flex flex-wrap items-center gap-x-5;
 }
 .item {
-   @apply py-1 relative text-base max-lg:text-sm;
+   @apply py-1 relative text-base max-lg:text-sm cursor-pointer;
    &._active {
       @apply font-bold;
    }
@@ -34,7 +34,7 @@
    @apply flex items-center gap-x-2;
 }
 .button {
-   @apply bg-darkBlue text-white px-5 h-10 rounded-full
+   @apply bg-darkBlue text-white px-5 h-10 rounded-full max-sm:hidden
    shadow-button transition-colors hover:bg-darkBlue/80 max-xl:h-8;
 }
 @media (max-width: 900px) {
@@ -49,7 +49,7 @@
       }
    }
    .menu {
-      @apply fixed top-0 -left-full w-full h-full bg-black/80 z-30
+      @apply fixed top-0 -left-full w-full h-full bg-black/80 z-[100]
       transition-all py-5 px-[15px];
    }
    .nav {
