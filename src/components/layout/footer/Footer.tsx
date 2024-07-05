@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Footer.module.scss";
 import Link from "next/link";
-import TgIcon from "../icons/TgIcon";
-import WhatsappIcon from "../icons/WhatsappIcon";
+import TgIcon from "../../UI/icons/TgIcon";
+import WhatsappIcon from "../../UI/icons/WhatsappIcon";
 
 const Footer = () => {
    return (

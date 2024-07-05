@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.scss";
-import Header from "@/components/UI/header/Header";
-import Footer from "@/components/UI/footer/Footer";
+import Header from "@/components/layout/header/Header";
+import Footer from "@/components/layout/footer/Footer";
 
 const inter = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
@@ -22,7 +22,9 @@ export default function RootLayout({
          <body className={inter.className}>
             <div className="w-full h-full flex flex-col">
                <Header />
-               <main className="flex-grow">{children}</main>
+               <main className="flex-grow py-10 mt-28 max-xl:mt-20">
+                  {children}
+               </main>
                <Footer />
             </div>
          </body>

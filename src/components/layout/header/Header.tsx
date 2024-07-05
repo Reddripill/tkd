@@ -4,9 +4,9 @@ import { usePathname } from "next/navigation";
 import styles from "./Header.module.scss";
 import cn from "classnames";
 import Link from "next/link";
-import TgIcon from "../icons/TgIcon";
-import WhatsappIcon from "../icons/WhatsappIcon";
-import Burger from "../burger/Burger";
+import TgIcon from "../../UI/icons/TgIcon";
+import WhatsappIcon from "../../UI/icons/WhatsappIcon";
+import Burger from "../../UI/burger/Burger";
 
 const Header = () => {
    const [isShow, setIsShow] = useState(false);
@@ -42,8 +42,11 @@ const Header = () => {
                               Главная
                            </Link>
                            <Link
-                              href="/"
-                              className={styles.item}
+                              href="/calendar"
+                              className={cn(styles.item, {
+                                 [styles._active]:
+                                    pathname.includes("calendar"),
+                              })}
                               onClick={closeMenu}
                            >
                               Календарный план
@@ -59,8 +62,11 @@ const Header = () => {
                               Структура организации
                            </Link>
                            <Link
-                              href="/"
-                              className={styles.item}
+                              href="/schedule"
+                              className={cn(styles.item, {
+                                 [styles._active]:
+                                    pathname.includes("schedule"),
+                              })}
                               onClick={closeMenu}
                            >
                               Расписание
@@ -74,7 +80,7 @@ const Header = () => {
                            </Link>
                         </nav>
                      </menu>
-                     <Link href="/">
+                     <Link href="/record">
                         <button className={styles.button}>Записаться</button>
                      </Link>
                      {/* <div className={styles.socials}>

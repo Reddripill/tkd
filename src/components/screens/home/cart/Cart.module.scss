@@ -1,0 +1,22 @@
+.cart {
+   @apply w-full h-full overflow-hidden rounded-[10px] flex flex-col;
+}
+.content {
+   @apply bg-white p-4 grow;
+}
+.title {
+   @apply inline-block font-bold lg:text-lg text-base leading-5 mb-2;
+   width: 100%;
+   overflow: hidden;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 2;
+   display: -webkit-box;
+}
+.text {
+   @apply lg:text-base text-sm leading-5;
+   width: 100%;
+   overflow: hidden;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3;
+   display: -webkit-box;
+}
