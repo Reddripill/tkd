@@ -1,5 +1,5 @@
 .cart {
-   @apply w-full h-full overflow-hidden rounded-[10px] flex flex-col;
+   @apply w-full h-full overflow-hidden rounded-main flex flex-col;
 }
 .content {
    @apply bg-white p-4 grow;

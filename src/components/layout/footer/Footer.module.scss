@@ -15,7 +15,7 @@
    grid-template-columns: repeat(2, 220px);
 }
 .menu {
-   @apply flex flex-col gap-y-2 max-md:mb-8;
+   @apply inline-flex flex-col items-start gap-y-2 max-md:mb-8;
 }
 
 .item {
