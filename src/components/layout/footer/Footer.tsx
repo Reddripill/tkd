@@ -23,17 +23,14 @@ const Footer = () => {
                      <Link href="/" className={styles.item}>
                         Главная
                      </Link>
-                     <Link href="/" className={styles.item}>
+                     <Link href="/calendar" className={styles.item}>
                         Календарный план
                      </Link>
                      <Link href="/structure" className={styles.item}>
                         Структура организации
                      </Link>
-                     <Link href="/" className={styles.item}>
+                     <Link href="/schedule" className={styles.item}>
                         Расписание
-                     </Link>
-                     <Link href="/" className={styles.item}>
-                        Контакты
                      </Link>
                   </div>
                   <div className={styles.contacts}>

@@ -1,5 +1,10 @@
 import Calendar from "@/components/screens/calendar/Calendar";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+   title: "Календарный план",
+};
 
 const CalendarPage = () => {
    return (

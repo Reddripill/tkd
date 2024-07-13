@@ -16,7 +16,6 @@ const Calendar = () => {
             locale={ruLocale}
             initialView="dayGridMonth"
             headerToolbar={{ end: "prev next" }}
-            // aspectRatio={1}
             contentHeight={"auto"}
             events={[
                { title: "First Event", start: "2024-07-12" },
