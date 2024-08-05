@@ -16,11 +16,14 @@ const config: Config = {
             darkBlue: "#00183C",
             lightBlue: "#022252",
             extraLightBlue: "#E8F9FE",
+            calendarBlue: "#007aff",
+            event: "rgba(34, 140, 115, 1)",
          },
          colors: {
             darkBlue: "#00183C",
             gray: "#989696",
             ceil: "#ddd",
+            calendarBlue: "#007aff",
          },
          boxShadow: {
             header:

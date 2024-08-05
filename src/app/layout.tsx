@@ -3,8 +3,14 @@ import { Roboto } from "next/font/google";
 import "./globals.scss";
 import Header from "@/components/layout/header/Header";
 import Footer from "@/components/layout/footer/Footer";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import "dayjs/locale/ru";
 
 const inter = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
+
+dayjs.extend(localizedFormat);
+dayjs.locale("ru");
 
 export const metadata: Metadata = {
    title: "Тхэквондо ГТФ РТ",
