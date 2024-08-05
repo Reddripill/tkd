@@ -1,4 +1,4 @@
-import { EventInputType } from "@/components/UI/fullCalendar/fullCalendar.styles";
+import { EventInputType } from "@/components/UI/fullCalendar/fullCalendar.types";
 
 export const calendarEvents: EventInputType[] = [
    { id: "1", title: "First Event", start: "2024-08-15" },

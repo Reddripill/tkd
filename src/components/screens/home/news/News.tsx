@@ -12,7 +12,7 @@ const News = () => {
             <div className="title-h1">Актуальные новости</div>
             <Slider>
                {cartData.map((cart) => (
-                  <Cart key={cart.alt} {...cart} />
+                  <Cart key={cart.id} {...cart} />
                ))}
             </Slider>
          </div>

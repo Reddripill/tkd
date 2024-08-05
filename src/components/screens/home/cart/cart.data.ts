@@ -4,10 +4,12 @@ export interface ICartData {
    title: string;
    text: string;
    alt: string;
+   id: string;
 }
 
 export const cartData: ICartData[] = [
    {
+      id: "1",
       image: "/cart_1.png",
       date: "20.03.2024, 18:00",
       title: "Казанский школьник взял золото на чемпионате и первенстве ПФО по тхэквондо",
@@ -15,6 +17,7 @@ export const cartData: ICartData[] = [
       alt: "One Image Cart",
    },
    {
+      id: "2",
       image: "/cart_2.png",
       date: "11.10.2023, 17:14",
       title: "Кубок мира по тхэквондо ГТФ стартовал в Казани",
@@ -22,6 +25,7 @@ export const cartData: ICartData[] = [
       alt: "Two Image Cart",
    },
    {
+      id: "3",
       image: "/cart_3.png",
       date: "27.04.2023, 15:05",
       title: "Казань примет всероссийские соревнования по тхэквондо",
@@ -29,6 +33,7 @@ export const cartData: ICartData[] = [
       alt: "Three Image Cart",
    },
    {
+      id: "4",
       image: "/cart_4.png",
       date: "28.03.2023, 14:48",
       title: "Первенство России по тхэквондо в Казани пройдет с участием 400 спортсменов из 48 регионов",
@@ -36,6 +41,7 @@ export const cartData: ICartData[] = [
       alt: "Four Image Cart",
    },
    {
+      id: "5",
       image: "/cart_1.png",
       date: "20.03.2024, 18:00",
       title: "Казанский школьник взял золото на чемпионате и первенстве ПФО по тхэквондо",
@@ -43,6 +49,7 @@ export const cartData: ICartData[] = [
       alt: "Five Image Cart",
    },
    {
+      id: "6",
       image: "/cart_2.png",
       date: "11.10.2023, 17:14",
       title: "Кубок мира по тхэквондо ГТФ стартовал в Казани",
@@ -50,6 +57,7 @@ export const cartData: ICartData[] = [
       alt: "Six Image Cart",
    },
    {
+      id: "7",
       image: "/cart_3.png",
       date: "27.04.2023, 15:05",
       title: "Казань примет всероссийские соревнования по тхэквондо",
@@ -57,6 +65,7 @@ export const cartData: ICartData[] = [
       alt: "Seven Image Cart",
    },
    {
+      id: "8",
       image: "/cart_4.png",
       date: "28.03.2023, 14:48",
       title: "Первенство России по тхэквондо в Казани пройдет с участием 400 спортсменов из 48 регионов",
