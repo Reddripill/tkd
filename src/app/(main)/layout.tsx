@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import "./globals.scss";
-import Header from "@/components/layout/header/Header";
-import Footer from "@/components/layout/footer/Footer";
+import "../globals.scss";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import "dayjs/locale/ru";
+import Header from "@/components/layout/mainLayout/header/Header";
+import Footer from "@/components/layout/mainLayout/footer/Footer";
 
 const inter = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
       "ФТРТ - амбициозная, быстро развивающаяся, аккредитованная организация, обладающая исключительным правом развивать тхэквондо ГТФ на территории Республики Татарстан.",
 };
 
-export default function RootLayout({
+export default function MainLayout({
    children,
 }: Readonly<{
    children: React.ReactNode;

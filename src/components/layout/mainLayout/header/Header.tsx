@@ -1,15 +1,19 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
-import styles from "./Header.module.scss";
-import cn from "classnames";
+import Burger from "@/components/UI/burger/Burger";
 import Link from "next/link";
-import Burger from "../../UI/burger/Burger";
-/* import TgIcon from "../../UI/icons/TgIcon";
-import WhatsappIcon from "../../UI/icons/WhatsappIcon"; */
+import cn from "classnames";
+import styles from "./Header.module.scss";
+
+const RecordPopup = dynamic(() => import("../recordPopup/RecordPopup"));
 
 const Header = () => {
    const [isShow, setIsShow] = useState(false);
+   const [isMounted, setIsMounted] = useState(false);
+   const [isPopupOpen, setIsPopupOpen] = useState(false);
    const pathname = usePathname();
    const closeMenu = () => {
       setIsShow(false);
@@ -22,6 +26,10 @@ const Header = () => {
          behavior: "smooth",
       });
    };
+   useEffect(() => {
+      setIsMounted(true);
+      return () => setIsMounted(false);
+   }, []);
    return (
       <header className={styles.header}>
          <div className={styles.wrapper}>
@@ -87,26 +95,22 @@ const Header = () => {
                            </button>
                         </nav>
                      </menu>
-                     <Link href="/record">
-                        <button className={styles.button}>Записаться</button>
-                     </Link>
-                     {/* <div className={styles.socials}>
-                        <Link href="/">
-                           <div className="bg-[#039BE5] p-[7px] rounded-full">
-                              <TgIcon className="fill-white size-4" />
-                           </div>
-                        </Link>
-                        <Link href="/">
-                           <div className="bg-[#0CC143] p-[7px] rounded-full box-border">
-                              <WhatsappIcon className="fill-white size-4" />
-                           </div>
-                        </Link>
-                     </div> */}
+                     <button
+                        onClick={() => setIsPopupOpen(true)}
+                        className={styles.button}
+                     >
+                        Записаться
+                     </button>
                      <Burger isShow={isShow} setIsShow={setIsShow} />
                   </div>
                </div>
             </div>
          </div>
+         {isMounted &&
+            createPortal(
+               <RecordPopup isOpen={isPopupOpen} setIsOpen={setIsPopupOpen} />,
+               document.body
+            )}
       </header>
    );
 };

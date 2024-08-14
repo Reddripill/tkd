@@ -1,0 +1,24 @@
+.field {
+   @apply mb-4 last:mb-0;
+   &._error > .input {
+      @apply border-red-600;
+   }
+   &._error > .label {
+      @apply text-red-600;
+   }
+}
+.label {
+   @apply text-gray text-sm font-medium mb-1 transition-colors;
+}
+.input {
+   @apply w-full h-9 border-2 border-ceil rounded-md px-2
+   transition-colors focus:border-darkBlue outline-none;
+}
+.button {
+   @apply text-center bg-darkBlue rounded-md h-9 w-full
+   text-white mt-4 transition-colors hover:bg-darkBlue/80
+   disabled:bg-darkBlue/80;
+}
+.error {
+   @apply text-xs text-red-600 font-bold mt-[2px];
+}
