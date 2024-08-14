@@ -5,6 +5,7 @@ import { SetStateType } from "@/types/main.types";
 import { X as Cross } from "lucide-react";
 import styles from "./Popup.module.scss";
 import cn from "classnames";
+import { restoreScrollbar } from "@/utility/manageScrollbar";
 
 export interface IPopupProps {
    isOpen: boolean;
@@ -16,12 +17,15 @@ interface IProps extends IPopupProps {
 }
 
 const Popup = ({ children, isOpen, setIsOpen }: IProps) => {
-   const popupRef = useOutside(() => setIsOpen(false));
+   const closePopupHandler = () => {
+      restoreScrollbar(() => setIsOpen(false));
+   };
+   const popupRef = useOutside(closePopupHandler);
    return (
       <div className={cn(styles.wrapper, { [styles._open]: isOpen })}>
          <div ref={popupRef} className={styles.container}>
             <div className={styles.cross}>
-               <Cross onClick={() => setIsOpen(false)} />
+               <Cross onClick={closePopupHandler} />
             </div>
             <div className={styles.body}>{children}</div>
          </div>

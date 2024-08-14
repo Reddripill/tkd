@@ -7,6 +7,8 @@ import Burger from "@/components/UI/burger/Burger";
 import Link from "next/link";
 import cn from "classnames";
 import styles from "./Header.module.scss";
+import Image from "next/image";
+import { removeScrollbar, restoreScrollbar } from "@/utility/manageScrollbar";
 
 const RecordPopup = dynamic(() => import("../recordPopup/RecordPopup"));
 
@@ -16,7 +18,7 @@ const Header = () => {
    const [isPopupOpen, setIsPopupOpen] = useState(false);
    const pathname = usePathname();
    const closeMenu = () => {
-      setIsShow(false);
+      restoreScrollbar(() => setIsShow(false));
    };
    const scrollToBottom = () => {
       const top = document.body.scrollHeight;
@@ -25,6 +27,9 @@ const Header = () => {
          top,
          behavior: "smooth",
       });
+   };
+   const showPopupHandler = () => {
+      removeScrollbar(() => setIsPopupOpen(true));
    };
    useEffect(() => {
       setIsMounted(true);
@@ -36,7 +41,9 @@ const Header = () => {
             <div className="container">
                <div className={styles["header-container"]}>
                   <Link href="/" className="flex shrink-0 items-center gap-x-4">
-                     <div className="size-[70px] max-xl:size-14 bg-main rounded-full" />
+                     <div className="relative size-[70px] max-xl:size-14">
+                        <Image fill src="/tkd-logo.png" alt="TKD LOGO" />
+                     </div>
                      <div className={styles.label}>
                         Федерация Тхэквондо ГТФ Республики Татарстан
                      </div>
@@ -96,7 +103,7 @@ const Header = () => {
                         </nav>
                      </menu>
                      <button
-                        onClick={() => setIsPopupOpen(true)}
+                        onClick={showPopupHandler}
                         className={styles.button}
                      >
                         Записаться

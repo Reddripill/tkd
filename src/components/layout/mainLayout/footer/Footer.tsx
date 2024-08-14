@@ -3,6 +3,7 @@ import styles from "./Footer.module.scss";
 import Link from "next/link";
 import TgIcon from "@/components/UI/icons/TgIcon";
 import WhatsappIcon from "@/components/UI/icons/WhatsappIcon";
+import Image from "next/image";
 
 const Footer = () => {
    return (
@@ -13,7 +14,9 @@ const Footer = () => {
                   href="/"
                   className="flex shrink-0 items-center gap-x-4 max-lg:mb-8"
                >
-                  <div className="shrink-0 size-[70px] max-xl:size-14 bg-main rounded-full" />
+                  <div className="relative shrink-0 size-[70px] max-xl:size-14">
+                     <Image src="/tkd-logo.png" alt="TKD LOGO" fill />
+                  </div>
                   <div className={styles.label}>
                      Федерация Тхэквондо ГТФ Республики Татарстан
                   </div>
