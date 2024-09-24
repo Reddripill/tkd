@@ -1,0 +1,31 @@
+.wrapper {
+   @apply absolute top-20 left-20 z-[5] min-w-[400px] bg-white
+   rounded-main shadow-header;
+}
+.container {
+   @apply p-5;
+}
+.search {
+   @apply relative mb-6;
+}
+.info {
+   @apply mb-10;
+}
+.contacts {
+   @apply relative pt-6;
+   &::before {
+      @apply content-[''] absolute top-0 left-0 w-full h-[1px] bg-main;
+   }
+}
+.title {
+   @apply text-lg text-darkBlue font-bold;
+}
+.adress {
+   @apply text-sm text-gray;
+}
+.label {
+   @apply text-sm text-gray mb-2;
+}
+.contact {
+   @apply text-darkBlue text-sm mb-[2px] last:mb-0;
+}

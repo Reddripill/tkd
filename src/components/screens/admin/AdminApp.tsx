@@ -1,7 +1,7 @@
 "use client";
 import { Admin, Resource } from "react-admin";
-import authProvider from "@/providers/authProvider";
-import dataProvider from "@/providers/dataProvider";
+import authProvider from "@/api/authProvider";
+import dataProvider from "@/api/dataProvider";
 import { CartCreate, CartEdit, CartList } from "./AdminCart";
 import { PostList } from "./AdminPost";
 const AdminPanel: React.FC = () => {
