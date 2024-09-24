@@ -1,109 +1,39 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styles from "./MapSearch.module.scss";
 import Link from "next/link";
 import { MoveRight } from "lucide-react";
-import {
-   OutlinedInput,
-   MenuItem,
-   Select,
-   TextField,
-   Menu,
-   ClickAwayListener,
-   MenuList,
-   Popper,
-   Paper,
-} from "@mui/material";
+import { TextField, Autocomplete } from "@mui/material";
+import { clubList } from "../clubs.data";
 
 const MapSearch = () => {
-   const [text, setText] = useState("");
-   const [value, setValue] = useState<string | null>(null);
-   const [isOpen, setIsOpen] = useState(false);
-   const anchorRef = useRef<HTMLInputElement>(null);
-   const prevIsOpenRef = useRef(isOpen);
-   const handleClick = () => {
-      setIsOpen(!isOpen);
-   };
-   const handleClose = (event: Event | React.SyntheticEvent) => {
-      if (
-         anchorRef.current &&
-         anchorRef.current.contains(event.target as HTMLElement)
-      ) {
-         return;
-      }
-
-      setIsOpen(false);
-   };
-   const handleChangeValue = (
-      event: React.MouseEvent<HTMLLIElement, MouseEvent>
-   ) => {
-      /* setValue(event.target.value);
-      setText(event.target.value);
-      handleClose(event); */
-   };
-   const handleListKeyDown = (event: React.KeyboardEvent) => {
-      if (event.key === "Tab") {
-         event.preventDefault();
-         setIsOpen(false);
-      } else if (event.key === "Escape") {
-         setIsOpen(false);
-      }
-   };
-
-   React.useEffect(() => {
-      if (prevIsOpenRef.current === true && isOpen === false) {
-         anchorRef.current!.focus();
-      }
-
-      prevIsOpenRef.current = isOpen;
-   }, [isOpen]);
+   /* const [text, setText] = useState("");
+   const [value, setValue] = useState<string | null>(null); */
    return (
       <div className={styles.wrapper}>
          <div className={styles.container}>
             <div className={styles.search}>
-               <TextField
-                  ref={anchorRef}
-                  fullWidth
-                  placeholder="Выберите клуб"
-                  size="small"
-                  value={text}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                     setText(e.target.value)
-                  }
-                  onClick={handleClick}
-               ></TextField>
-               <Popper
-                  open={isOpen}
-                  anchorEl={anchorRef.current}
-                  // role={undefined}
-                  popperOptions={{ placement: "bottom" }}
+               <Autocomplete
                   disablePortal
-                  sx={{ width: "100%", zIndex: 3 }}
-               >
-                  <Paper>
-                     <ClickAwayListener onClickAway={handleClose}>
-                        <MenuList
-                           autoFocusItem={isOpen}
-                           id="composition-menu"
-                           aria-labelledby="composition-button"
-                           onKeyDown={handleListKeyDown}
-                        >
-                           {/* <MenuItem
-                              value=""
-                              sx={{ minHeight: "36px" }}
-                           ></MenuItem> */}
-                           <MenuItem value={10} onClick={handleChangeValue}>
-                              Ten
-                           </MenuItem>
-                           <MenuItem value={20} onClick={handleChangeValue}>
-                              Twenty
-                           </MenuItem>
-                           <MenuItem value={30} onClick={handleChangeValue}>
-                              Thirty
-                           </MenuItem>
-                        </MenuList>
-                     </ClickAwayListener>
-                  </Paper>
-               </Popper>
+                  options={clubList}
+                  sx={{
+                     fontSize: "14px",
+                     "& .MuiInputBase-input": {
+                        paddingLeft: "4px !important",
+                        fontSize: "14px",
+                     },
+                     "& .MuiFormLabel-root": { fontSize: "14px" },
+                     "& + .MuiPopper-root .MuiAutocomplete-option": {
+                        fontSize: "14px",
+                     },
+                  }}
+                  renderInput={(params) => (
+                     <TextField
+                        {...params}
+                        size="small"
+                        label="Выберите клуб"
+                     />
+                  )}
+               />
             </div>
             <div className={styles.club}>
                <div className={styles.info}>

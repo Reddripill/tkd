@@ -1,6 +1,6 @@
 export interface IClub {
    id: string | number;
-   name: string;
+   label: string;
    adress: string;
    coords: number[];
    contacts: {
@@ -13,7 +13,7 @@ export interface IClub {
 export const clubList: IClub[] = [
    {
       id: 1,
-      name: "TKD",
+      label: "TKD",
       adress: "ул. Баки Урманче, 5",
       coords: [55.732096, 49.177112],
       contacts: {
@@ -23,7 +23,7 @@ export const clubList: IClub[] = [
    },
    {
       id: 2,
-      name: "TKD num 2",
+      label: "TKD num 2",
       adress: "улю Ямашева, 61",
       coords: [55.825821, 49.129177],
       contacts: {
