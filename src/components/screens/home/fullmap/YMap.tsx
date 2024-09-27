@@ -1,9 +1,9 @@
 "use client";
+import React, { useLayoutEffect, useState, useRef } from "react";
 import { Clusterer, Map, Placemark } from "@pbe/react-yandex-maps";
-import React, { useLayoutEffect, useState } from "react";
 import MapSearch from "./mapSearch/MapSearch";
 import styles from "./FullMap.module.scss";
-import { clubList } from "./clubs.data";
+import { clubList, IClub } from "./clubs.data";
 
 type YMapShapeType = {
    width: number;
@@ -12,6 +12,8 @@ type YMapShapeType = {
 
 const YMap = () => {
    const [size, setSize] = useState<YMapShapeType>({ height: 800, width: 0 });
+   const [value, setValue] = useState<IClub | null>(clubList[0]);
+   const mapRef = useRef<ymaps.Map | undefined>(undefined);
    const configMapSize = () => {
       if (typeof window !== undefined) {
          setSize((prevSize) => ({
@@ -19,6 +21,15 @@ const YMap = () => {
             width: document.body.clientWidth,
          }));
       }
+   };
+   const handleClickPlacemark = (coords: number[]) => {
+      if (mapRef.current) {
+         mapRef.current.setCenter(coords, 12, { duration: 500 });
+      }
+   };
+   const handleChangeValue = (val: IClub) => {
+      handleClickPlacemark(val.coords);
+      setValue(val);
    };
    useLayoutEffect(() => {
       let throttled = false;
@@ -42,8 +53,9 @@ const YMap = () => {
          <Map
             width={size.width}
             height={size.height}
-            state={{ center: [55.796125, 49.1064], zoom: 12 }}
+            state={{ center: clubList[0].coords, zoom: 12 }}
             className={styles.ymap}
+            instanceRef={mapRef}
          >
             <Clusterer
                options={{
@@ -52,10 +64,14 @@ const YMap = () => {
                }}
             >
                {clubList.map((clubItem) => (
-                  <Placemark key={clubItem.id} geometry={clubItem.coords} />
+                  <Placemark
+                     key={clubItem.id}
+                     geometry={clubItem.coords}
+                     onClick={() => handleClickPlacemark(clubItem.coords)}
+                  />
                ))}
             </Clusterer>
-            <MapSearch />
+            <MapSearch value={value} handleChangeValue={handleChangeValue} />
          </Map>
       </div>
    );
