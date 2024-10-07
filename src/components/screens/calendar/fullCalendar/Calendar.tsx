@@ -92,7 +92,7 @@ const Calendar = () => {
       };
    }, []);
    return (
-      <div>
+      <div className="full-calendar">
          <FullCalendar
             ref={calendar}
             plugins={[dayGridPlugin, interactionPlugin]}

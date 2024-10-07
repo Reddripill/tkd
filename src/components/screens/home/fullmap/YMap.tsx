@@ -12,7 +12,7 @@ type YMapShapeType = {
 
 const YMap = () => {
    const [size, setSize] = useState<YMapShapeType>({ height: 800, width: 0 });
-   const [value, setValue] = useState<IClub | null>(clubList[0]);
+   const [value, setValue] = useState<IClub>(clubList[0]);
    const mapRef = useRef<ymaps.Map | undefined>(undefined);
    const configMapSize = () => {
       if (typeof window !== undefined) {
@@ -22,13 +22,17 @@ const YMap = () => {
          }));
       }
    };
-   const handleClickPlacemark = (coords: number[]) => {
+   const changePlacemarkCoords = (coords: number[]) => {
       if (mapRef.current) {
          mapRef.current.setCenter(coords, 12, { duration: 500 });
       }
    };
+   const handleClickPlacemark = (item: IClub) => {
+      changePlacemarkCoords(item.coords);
+      setValue(item);
+   };
    const handleChangeValue = (val: IClub) => {
-      handleClickPlacemark(val.coords);
+      changePlacemarkCoords(val.coords);
       setValue(val);
    };
    useLayoutEffect(() => {
@@ -67,7 +71,7 @@ const YMap = () => {
                   <Placemark
                      key={clubItem.id}
                      geometry={clubItem.coords}
-                     onClick={() => handleClickPlacemark(clubItem.coords)}
+                     onClick={() => handleClickPlacemark(clubItem)}
                   />
                ))}
             </Clusterer>

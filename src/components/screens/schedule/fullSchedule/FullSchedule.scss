@@ -1,0 +1,183 @@
+.full-schedule {
+   & .fc-toolbar-title {
+      @apply text-calendarBlue md:text-3xl sm:text-2xl text-xl #{!important};
+      &::first-letter {
+         @apply uppercase;
+      }
+   }
+   /* .fc-scroller {
+      @apply overflow-x-hidden overflow-y-visible #{!important};
+   } */
+   th {
+      @apply border-none #{!important};
+   }
+   .fc {
+      @apply bg-transparent rounded-main px-6 py-4;
+   }
+   .fc-scrollgrid-section-sticky > * {
+      @apply bg-transparent #{!important};
+   }
+   .fc-scroller {
+      @apply overflow-hidden #{!important};
+   }
+   .fc-scrollgrid {
+      @apply border-none #{!important};
+   }
+   /* .fc-day {
+      @apply pl-0 pr-2 #{!important};
+   }
+   .fc-day ~ .fc-day {
+      @apply px-2 last:pr-0 #{!important};
+   } */
+   .fc-day {
+      @apply px-2 #{!important};
+   }
+   .fc-header-toolbar {
+      @apply max-sm:mb-4 #{!important};
+   }
+   .fc-timegrid-axis {
+      @apply border-none #{!important};
+   }
+   .fc-scroller-harness {
+      @apply mb-10 #{!important};
+   }
+   .fc-col-header-cell {
+      @apply border-none #{!important};
+      & .fc-scrollgrid-sync-inner {
+         @apply bg-white py-2 #{!important};
+      }
+   }
+   .fc-col-header {
+      & .fc-day-today .fc-scrollgrid-sync-inner {
+         @apply bg-lightBlue text-white #{!important};
+      }
+      /* @apply mb-6 max-sm:mb-4;
+      & > thead {
+         @apply bg-extraLightBlue;
+      } */
+   }
+   .fc-col-header-cell-cushion {
+      @apply max-sm:text-sm #{!important};
+   }
+   /* .fc-scrollgrid-section-header > th {
+      @apply border-none;
+   } */
+   .fc-scrollgrid-section-body {
+      & > td {
+         @apply border-none;
+      }
+   }
+   .fc-timegrid-cols {
+      & .fc-day-today {
+         @apply bg-transparent #{!important};
+      }
+   }
+   .fc-timegrid-body {
+      & td {
+         @apply border-none;
+      }
+   }
+   .fc-day.date-hover .fc-daygrid-day-top {
+      @apply bg-calendarBlue text-white #{!important};
+   }
+   .fc-daygrid-day-top {
+      @apply m-1 size-7 rounded-full ml-auto;
+   }
+   .fc-daygrid-day-number {
+      @apply inline-block self-center text-base leading-none
+   text-center grow p-0 #{!important};
+   }
+   .fc-scrollgrid-sync-table {
+      @apply border-[0.8px] border-solid border-ceil #{!important};
+      .fc-daygrid-day-number {
+         @apply sm:text-lg text-base md:p-2 p-1;
+      }
+   }
+   .fc-daygrid-day-frame {
+      @apply cursor-pointer;
+      &:hover {
+         & .fc-daygrid-day-top {
+            @apply bg-calendarBlue/30;
+         }
+      }
+   }
+
+   .fc-button {
+      @apply bg-transparent p-0 sm:size-10 size-8 last:ml-2
+   border-none outline-none #{!important};
+      &:focus {
+         @apply border-none outline-none shadow-none #{!important};
+      }
+      & > .fc-icon {
+         @apply h-full w-full flex items-center justify-center
+      max-sm:text-lg leading-none #{!important};
+         &::before {
+            @apply text-calendarBlue hover:text-calendarBlue/60
+         transition-colors text-3xl #{!important};
+         }
+      }
+   }
+
+   /* EVENTS */
+   .fc-timegrid-event-harness {
+      @apply w-full left-0 cursor-pointer #{!important};
+   }
+   .fc-timegrid-event {
+      @apply shadow-none mb-0 #{!important};
+   }
+   .fc-timegrid-event {
+      @apply bg-transparent border-none rounded-none #{!important};
+   }
+   .fc-event {
+      @apply w-full #{!important};
+   }
+   .fc-event-main {
+      @apply w-full p-0 #{!important};
+   }
+   .fc-event-custom {
+      @apply absolute left-0 w-full h-full bg-lightBlue
+      rounded-[6px] p-2;
+   }
+   .fc-timegrid-col-events {
+      @apply w-full m-0 #{!important};
+   }
+   .fc-timegrid-slot-label {
+      @apply box-content pb-2 h-[100px] align-top #{!important};
+   }
+   .fc-timegrid-slot-lane {
+      @apply before:hidden #{!important};
+   }
+   .fc-timegrid-event-harness {
+      @apply mb-2 #{!important};
+   }
+   /* MEDIA QUERY */
+
+   @media (max-width: 640px) {
+      .fc-daygrid-day {
+         @apply border-none rounded-full #{!important};
+      }
+      .fc-daygrid-day-events {
+         @apply hidden;
+      }
+      .fc-scrollgrid-sync-table {
+         @apply border-none #{!important};
+      }
+      .fc-daygrid-day-frame {
+         @apply flex justify-center items-center;
+      }
+      .fc-daygrid-day-top {
+         @apply m-0 size-10;
+      }
+   }
+   @media (max-width: 450px) {
+      .fc-daygrid-day-top {
+         @apply size-8;
+      }
+      .fc-daygrid-day-number {
+         @apply text-sm #{!important};
+      }
+      .fc-col-header-cell-cushion {
+         @apply text-xs #{!important};
+      }
+   }
+}

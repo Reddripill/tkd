@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./CalendarEvents.module.scss";
-import { calendarEvents } from "./calendar.data";
+import { calendarEvents } from "../calendar.data";
 import dayjs from "dayjs";
 
 const CalendarEvents = () => {

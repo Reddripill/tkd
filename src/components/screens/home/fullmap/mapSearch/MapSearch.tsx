@@ -5,7 +5,7 @@ import { MoveRight } from "lucide-react";
 import { TextField, Autocomplete } from "@mui/material";
 import { clubList, IClub } from "../clubs.data";
 
-interface IProps<T = IClub | null> {
+interface IProps<T = IClub> {
    value: T;
    handleChangeValue: (val: IClub) => void;
 }
@@ -17,7 +17,7 @@ const MapSearch = ({ value, handleChangeValue }: IProps) => {
             <div className={styles.search}>
                <Autocomplete
                   value={value}
-                  onChange={(e: any, newValue: IClub | null) => {
+                  onChange={(e: any, newValue: IClub) => {
                      if (newValue) handleChangeValue(newValue);
                   }}
                   disablePortal
@@ -25,6 +25,9 @@ const MapSearch = ({ value, handleChangeValue }: IProps) => {
                   clearOnBlur
                   handleHomeEndKeys
                   options={clubList}
+                  closeText=""
+                  openText=""
+                  disableClearable={true}
                   sx={{
                      fontSize: "14px",
                      "& .MuiInputBase-input": {
