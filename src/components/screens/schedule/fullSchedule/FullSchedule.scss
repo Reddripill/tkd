@@ -1,9 +1,13 @@
 .full-schedule {
+   @apply relative mx-6 my-4;
    & .fc-toolbar-title {
       @apply text-calendarBlue md:text-3xl sm:text-2xl text-xl #{!important};
       &::first-letter {
          @apply uppercase;
       }
+   }
+   .fc-view-harness {
+      @apply pr-[58px] #{!important};
    }
    /* .fc-scroller {
       @apply overflow-x-hidden overflow-y-visible #{!important};
@@ -12,7 +16,7 @@
       @apply border-none #{!important};
    }
    .fc {
-      @apply bg-transparent rounded-main px-6 py-4;
+      @apply bg-transparent rounded-main;
    }
    .fc-scrollgrid-section-sticky > * {
       @apply bg-transparent #{!important};
@@ -30,7 +34,7 @@
       @apply px-2 last:pr-0 #{!important};
    } */
    .fc-day {
-      @apply px-2 #{!important};
+      @apply px-2 last:pr-0 #{!important};
    }
    .fc-header-toolbar {
       @apply max-sm:mb-4 #{!important};
@@ -150,6 +154,19 @@
    .fc-timegrid-event-harness {
       @apply mb-2 #{!important};
    }
+
+   /* CUSTOM */
+
+   .fc-schedule-button {
+      @apply absolute top-[10px] z-[6] cursor-pointer;
+   }
+   .fc-schedule-button__prev {
+      @apply left-[10px];
+   }
+   .fc-schedule-button__next {
+      @apply right-[10px];
+   }
+
    /* MEDIA QUERY */
 
    @media (max-width: 640px) {
