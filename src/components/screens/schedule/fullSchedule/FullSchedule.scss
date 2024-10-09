@@ -1,5 +1,5 @@
 .full-schedule {
-   @apply relative mx-6 my-4;
+   @apply relative my-4;
    & .fc-toolbar-title {
       @apply text-calendarBlue md:text-3xl sm:text-2xl text-xl #{!important};
       &::first-letter {
@@ -29,10 +29,13 @@
    }
    /* .fc-day {
       @apply pl-0 pr-2 #{!important};
-   }
-   .fc-day ~ .fc-day {
+   }*/
+   /* .fc-day ~ .fc-day {
       @apply px-2 last:pr-0 #{!important};
    } */
+   .fc-col-header-cell-cushion {
+      @apply min-[1500px]:text-base xl:text-sm;
+   }
    .fc-day {
       @apply px-2 last:pr-0 #{!important};
    }
@@ -168,6 +171,12 @@
    }
 
    /* MEDIA QUERY */
+
+   /* @media (max-width: 1550px) {
+      .full-schedule {
+         @apply mx-2;
+      }
+   } */
 
    @media (max-width: 640px) {
       .fc-daygrid-day {

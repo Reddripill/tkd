@@ -12,7 +12,7 @@ const FullSchedule = () => {
    const scheduleRef = useRef<FullCalendar>(null);
    const [eventSlotHeight, setEventSlotHeight] = useState(100);
    const EVENT_GAP = 8;
-   const configAspectRatio = () => {
+   const configCellHeight = () => {
       if (typeof window !== undefined) {
          const width = window.innerWidth;
          if (width > 1400) {
@@ -24,6 +24,32 @@ const FullSchedule = () => {
          }
       }
    };
+   const configCalendar = () => {
+      if (typeof window !== undefined) {
+         const width = window.innerWidth;
+         const calendarApi = scheduleRef.current?.getApi();
+         if (calendarApi) {
+            if (width < 1280) {
+               calendarApi.setOption("dayHeaderFormat", {
+                  weekday: "short",
+                  day: "numeric",
+                  month: "2-digit",
+               });
+            } else {
+               calendarApi.setOption("dayHeaderFormat", {
+                  weekday: "long",
+                  day: "numeric",
+                  month: "2-digit",
+               });
+            }
+            if (width < 1024) {
+               calendarApi.changeView("timeGridSingleDay");
+            } else {
+               calendarApi.changeView("timeGridWeek");
+            }
+         }
+      }
+   };
    const handlePrevClick = () => {
       const calendarApi = scheduleRef.current?.getApi();
       if (calendarApi) calendarApi.prev();
@@ -32,18 +58,21 @@ const FullSchedule = () => {
       const calendarApi = scheduleRef.current?.getApi();
       if (calendarApi) calendarApi.next();
    };
+
    useLayoutEffect(() => {
       let throttled = false;
       const handleResize = () => {
          if (!throttled) {
-            configAspectRatio();
+            configCellHeight();
+            configCalendar();
             throttled = true;
             setTimeout(function () {
                throttled = false;
             }, 250);
          }
       };
-      configAspectRatio();
+      configCellHeight();
+      configCalendar();
       window.addEventListener("resize", handleResize);
       return () => {
          window.removeEventListener("resize", handleResize);
@@ -94,18 +123,24 @@ const FullSchedule = () => {
                   />
                );
             }}
+            views={{
+               timeGridSingleDay: {
+                  type: "timeGrid",
+                  duration: { days: 1 },
+               },
+            }}
          />
          <div
             className="fc-schedule-button fc-schedule-button__prev"
             onClick={handlePrevClick}
          >
-            <ChevronLeft />
+            <ChevronLeft size={24} />
          </div>
          <div
             className="fc-schedule-button fc-schedule-button__next"
             onClick={handleNextClick}
          >
-            <ChevronRight />
+            <ChevronRight size={24} />
          </div>
       </div>
    );

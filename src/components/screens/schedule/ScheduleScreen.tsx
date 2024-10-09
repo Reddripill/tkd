@@ -1,10 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./ScheduleScreen.module.scss";
-import { SlidersHorizontal } from "lucide-react";
 import FullSchedule from "./fullSchedule/FullSchedule";
+import ScheduleFilters from "./filters/ScheduleFilters";
+import { filterData, IFilter } from "./filters/filters.data";
 
 const ScheduleScreen = () => {
+   const [filter, setFilter] = useState<IFilter[]>(filterData);
    return (
       <div className="screen">
          <div className="section">
@@ -12,14 +14,11 @@ const ScheduleScreen = () => {
                <div className="container">
                   <div className="flex items-center justify-between">
                      <div className="title-h1">Расписание тренировок TKD</div>
-                     <button type="button" className={styles.filter}>
-                        <SlidersHorizontal size={16} />
-                        <div className={styles.text}>Фильтры</div>
-                     </button>
+                     <ScheduleFilters filter={filter} setFilter={setFilter} />
                   </div>
                </div>
             </div>
-            <div className="mx-5">
+            <div className="mx-2">
                <FullSchedule />
             </div>
          </div>

@@ -1,0 +1,49 @@
+.filter {
+   @apply flex items-center gap-x-1;
+}
+.wrapper {
+   @apply relative w-[730px] bg-white focus-visible:outline-none
+   p-10 rounded-main;
+}
+.close {
+   @apply absolute top-6 right-6 cursor-pointer p-2 bg-main;
+}
+.main {
+   @apply mb-10;
+}
+.actions {
+   @apply flex items-center gap-x-2;
+}
+.button {
+   @apply h-11 flex-auto border-[2px] transition-colors;
+}
+.button-apply {
+   @apply text-darkBlue border-darkBlue font-bold
+   hover:bg-darkBlue hover:text-white;
+}
+.button-cancel {
+   @apply text-gray border-gray hover:bg-gray
+   hover:text-white;
+}
+.filter-item {
+   @apply mb-6 last:mb-0;
+}
+.filter-name {
+   @apply font-medium mb-2;
+}
+/* Checkbox Field*/
+.filter-checkbox-field {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+   row-gap: 16px;
+}
+.checkbox-item {
+   @apply flex items-center gap-2;
+}
+.checkbox {
+   @apply hover:bg-transparent p-0 #{!important};
+}
+.checkbox-label {
+   @apply font-bold;
+}
+/* Input Field */
