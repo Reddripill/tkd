@@ -8,6 +8,7 @@ import ScheduleEmpty from "../ScheduleEmpty";
 import { clubList, IClub } from "../../home/fullmap/clubs.data";
 import { filterData, IFilter, IFilterOption } from "../filters/filters.data";
 import { configFilter } from "@/utility/configFilter";
+import { ScheduleEventType } from "@/types/fullCalendar.types";
 
 const ScheduleDynScreen = ({ club_id }: { club_id: string }) => {
    const clubEvents = scheduleEvents.find((item) => item.club_id === club_id);
@@ -31,7 +32,7 @@ const ScheduleDynScreen = ({ club_id }: { club_id: string }) => {
                         setEvents={setEvents}
                         filter={filter}
                         setFilter={setFilter}
-                        defaultEvents={events}
+                        defaultEvents={clubEvents as ScheduleEventType}
                         defaultFilter={defaultFilter}
                      />
                   </div>

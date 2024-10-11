@@ -9,7 +9,7 @@ import styles from "./ScheduleFilters.module.scss";
 import cn from "classnames";
 import CustomModal from "@/components/UI/modal/CustomModal";
 import { scheduleEvents } from "../schedule.data";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface IProps {
    setEvents: SetStateType<ScheduleEventType | undefined>;
@@ -29,6 +29,7 @@ const ScheduleFilters = ({
    defaultFilter,
 }: IProps) => {
    const router = useRouter();
+   const pathname = usePathname();
    const [isOpen, setIsOpen] = useState(false);
    const handleOpen = () => setIsOpen(true);
    const handleClose = () => setIsOpen(false);
@@ -37,11 +38,20 @@ const ScheduleFilters = ({
       const currentClubFilter = filter.find(
          (item) => item.filterName === "club"
       ) as IFilter;
+      if (defaultEvents.club_id !== currentClubFilter.value[0].value) {
+         const pathnameArr = pathname.split("/");
+         pathnameArr[pathnameArr.length - 1] =
+            currentClubFilter.value[0].value.toString();
+         const newPathname = pathnameArr.join("/");
+         router.push(newPathname);
+      }
       let events = scheduleEvents.find(
          (schedule) => schedule.club_id === currentClubFilter.value[0]?.value
       ) as ScheduleEventType;
       setEvents((prevEvents) => {
-         const isClubsEqual = prevEvents?.club_id === currentClub.value;
+         if (prevEvents?.club_id !== currentClub.value) {
+            console.log(pathname);
+         }
          for (const item of filter) {
             if (item.filterName === "timesOfDay") {
                const distinctions: number[][] = [];
@@ -76,7 +86,6 @@ const ScheduleFilters = ({
                const filtersValue = item.options
                   ? item.value.map((itemValue) => itemValue.value)
                   : [];
-               console.log(filtersValue);
                if (filtersValue.length !== 0) {
                   const filteredEvents = events.events.filter((event) => {
                      if (event.hall) return filtersValue.includes(event.hall);
