@@ -2,13 +2,13 @@ import React, { useState, useRef, useLayoutEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import ruLocale from "@fullcalendar/core/locales/ru";
-import { scheduleEvents } from "../schedule.data";
 import FullScheduleEvent from "./FullScheduleEvent";
-import "./FullSchedule.scss";
 import FullScheduleSlotLabel from "./FullScheduleSlotLabel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ScheduleEventInputType } from "@/types/fullCalendar.types";
+import "./FullSchedule.scss";
 
-const FullSchedule = () => {
+const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
    const scheduleRef = useRef<FullCalendar>(null);
    const [eventSlotHeight, setEventSlotHeight] = useState(100);
    const EVENT_GAP = 8;
@@ -97,7 +97,7 @@ const FullSchedule = () => {
                return (
                   <FullScheduleSlotLabel
                      eventSlotHeight={eventSlotHeight}
-                     schedule={scheduleEvents}
+                     schedule={events}
                      gap={EVENT_GAP}
                      {...event}
                   />
@@ -110,15 +110,14 @@ const FullSchedule = () => {
             }}
             slotMinTime="08:00"
             slotDuration="1:00:00"
-            events={scheduleEvents}
+            events={events}
             headerToolbar={false}
             eventContent={(event) => {
-               // console.log(event);
                return (
                   <FullScheduleEvent
                      gap={EVENT_GAP}
                      eventSlotHeight={eventSlotHeight}
-                     schedule={scheduleEvents}
+                     schedule={events}
                      {...event}
                   />
                );

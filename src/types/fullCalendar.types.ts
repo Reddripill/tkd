@@ -1,4 +1,4 @@
-import { EventInput, EventSourceInput } from "@fullcalendar/core/index.js";
+import { EventInput } from "@fullcalendar/core/index.js";
 
 export type EventInputType = EventInput &
    Required<Pick<EventInput, "id" | "title" | "start">>;
@@ -12,3 +12,8 @@ export type ScheduleEventInputType = EventInput &
    Required<
       Pick<EventInput, "id" | "title" | "start" | "startTime" | "endTime">
    >;
+
+export type ScheduleEventType = {
+   club_id: string;
+   events: ScheduleEventInputType[];
+};

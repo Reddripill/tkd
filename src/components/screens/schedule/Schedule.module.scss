@@ -1,0 +1,26 @@
+.text {
+   @apply text-black font-bold;
+}
+.filter {
+   @apply flex items-center gap-x-1;
+}
+.body {
+   @apply flex flex-col items-center mt-32 mb-48;
+}
+.icon {
+   @apply mb-4 text-error;
+}
+.content {
+   @apply text-center;
+}
+.title {
+   @apply font-bold text-2xl mb-1 tracking-wider;
+}
+.text {
+   @apply text-gray font-light tracking-wider;
+}
+.button {
+   @apply w-full h-11 flex-auto border-[2px] transition-colors
+   text-darkBlue border-darkBlue font-bold
+   hover:bg-darkBlue hover:text-white;
+}

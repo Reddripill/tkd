@@ -1,13 +1,6 @@
 .filter {
    @apply flex items-center gap-x-1;
 }
-.wrapper {
-   @apply relative w-[730px] bg-white focus-visible:outline-none
-   p-10 rounded-main;
-}
-.close {
-   @apply absolute top-6 right-6 cursor-pointer p-2 bg-main;
-}
 .main {
    @apply mb-10;
 }

@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./ScheduleFilters.module.scss";
 import { Checkbox } from "@mui/material";
 import { SetStateType } from "@/types/main.types";
-import { IFilter } from "./filters.data";
+import { IFilter, IFilterOption } from "./filters.data";
+import styles from "./ScheduleFilters.module.scss";
 
 interface IProps {
    setFilter: SetStateType<IFilter[]>;
@@ -10,23 +10,22 @@ interface IProps {
 }
 
 const CheckboxField = ({ setFilter, filterItem }: IProps) => {
-   const getIsChecked = (filterItem: IFilter, option: string) => {
-      return filterItem.value === option || filterItem.value?.includes(option);
+   const getIsChecked = (filterItem: IFilter, option: string | number) => {
+      return Boolean(filterItem.value.find((item) => item.value === option));
    };
-   const handleIsChecked = (filterItem: IFilter, option: string) => {
-      const isChecked = getIsChecked(filterItem, option);
-      const valueArr = filterItem.value as string[];
+   const handleIsChecked = (filterItem: IFilter, option: IFilterOption) => {
+      const isChecked = getIsChecked(filterItem, option.value);
       setFilter((prevState) =>
          prevState.map((item) => {
             if (
                item.type === filterItem.type &&
-               item.name === filterItem.name
+               item.filterName === filterItem.filterName
             ) {
                return {
                   ...item,
                   value: isChecked
-                     ? valueArr.filter((i) => i !== option)
-                     : [...valueArr, option],
+                     ? item.value.filter((i) => i.value !== option.value)
+                     : [...item.value, option],
                };
             }
             return item;
@@ -36,14 +35,14 @@ const CheckboxField = ({ setFilter, filterItem }: IProps) => {
    return (
       <>
          {filterItem.options?.map((item) => (
-            <div key={item} className={styles["checkbox-item"]}>
+            <div key={item.value} className={styles["checkbox-item"]}>
                <Checkbox
-                  value={getIsChecked(filterItem, item)}
+                  checked={getIsChecked(filterItem, item.value)}
                   onChange={() => handleIsChecked(filterItem, item)}
                   className={styles.checkbox}
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
                />
-               <div className={styles["checkbox-label"]}>{item}</div>
+               <div className={styles["checkbox-label"]}>{item.label}</div>
             </div>
          ))}
       </>

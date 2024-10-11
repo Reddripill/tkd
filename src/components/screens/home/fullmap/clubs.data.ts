@@ -12,7 +12,7 @@ export interface IClub {
 
 export const clubList: IClub[] = [
    {
-      id: 1,
+      id: "tkd",
       label: "TKD",
       adress: "ул. Баки Урманче, 5",
       coords: [55.732096, 49.177112],
@@ -22,7 +22,7 @@ export const clubList: IClub[] = [
       },
    },
    {
-      id: 2,
+      id: "tkd-num-2",
       label: "TKD num 2",
       adress: "улю Ямашева, 61",
       coords: [55.825821, 49.129177],
