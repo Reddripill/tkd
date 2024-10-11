@@ -74,8 +74,9 @@ const ScheduleFilters = ({
             }
             if (item.filterName === "place") {
                const filtersValue = item.options
-                  ? item.options.map((item) => item.value)
+                  ? item.value.map((itemValue) => itemValue.value)
                   : [];
+               console.log(filtersValue);
                if (filtersValue.length !== 0) {
                   const filteredEvents = events.events.filter((event) => {
                      if (event.hall) return filtersValue.includes(event.hall);
