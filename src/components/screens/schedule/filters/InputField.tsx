@@ -15,7 +15,8 @@ const InputField = ({ filterItem, setFilter }: IProps) => {
       if (clubOption) {
          setFilter((prevState) =>
             prevState.map((item) =>
-               item.type === filterItem.type && item.name === filterItem.name
+               item.type === filterItem.type &&
+               item.filterName === filterItem.filterName
                   ? {
                        ...item,
                        value: [
