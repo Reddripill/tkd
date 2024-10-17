@@ -40,7 +40,6 @@ const CheckboxField = ({ setFilter, filterItem }: IProps) => {
                   checked={getIsChecked(filterItem, item.value)}
                   onChange={() => handleIsChecked(filterItem, item)}
                   className={styles.checkbox}
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }}
                />
                <div className={styles["checkbox-label"]}>{item.label}</div>
             </div>

@@ -2,7 +2,7 @@
    @apply flex items-center gap-x-1;
 }
 .main {
-   @apply mb-10;
+   @apply sm:mb-10 mb-8;
 }
 .actions {
    @apply flex items-center gap-x-2;
@@ -19,10 +19,10 @@
    hover:text-white;
 }
 .filter-item {
-   @apply mb-6 last:mb-0;
+   @apply md:mb-6 mb-4 last:mb-0;
 }
 .filter-name {
-   @apply font-medium mb-2;
+   @apply font-medium mb-2 text-sm sm:text-base;
 }
 /* Checkbox Field*/
 .filter-checkbox-field {
@@ -31,12 +31,23 @@
    row-gap: 16px;
 }
 .checkbox-item {
-   @apply flex items-center gap-2;
+   @apply flex items-center sm:gap-2 gap-1;
 }
 .checkbox {
    @apply hover:bg-transparent p-0 #{!important};
+   & svg {
+      @apply sm:size-[22px] size-5;
+   }
 }
 .checkbox-label {
-   @apply font-bold;
+   @apply text-sm sm:text-base;
 }
 /* Input Field */
+
+/* Media Queries */
+
+@media (max-width: 550px) {
+   .filter-checkbox-field {
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+   }
+}

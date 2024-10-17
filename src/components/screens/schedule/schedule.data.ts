@@ -7,7 +7,6 @@ export const scheduleEvents: ScheduleEventType[] = [
          {
             id: "1",
             title: "First Event",
-            start: "2024-09-30",
             startTime: "8:00",
             endTime: "9:00",
             daysOfWeek: [1, 3, 5],

@@ -3,6 +3,7 @@ import React from "react";
 import styles from "../Schedule.module.scss";
 import ScheduleSelect from "../ScheduleSelect";
 import ScheduleEmpty from "../ScheduleEmpty";
+import cn from "classnames";
 
 const ScheduleScreen = () => {
    return (
@@ -10,8 +11,10 @@ const ScheduleScreen = () => {
          <div className="section">
             <div className={styles.head}>
                <div className="container">
-                  <div className="flex items-center justify-between">
-                     <div className="title-h1">Расписание тренировок</div>
+                  <div className={styles["head-content"]}>
+                     <div className={cn("title-h1", styles["schedule-title"])}>
+                        Расписание тренировок
+                     </div>
                      <ScheduleSelect />
                   </div>
                </div>

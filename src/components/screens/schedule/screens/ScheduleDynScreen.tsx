@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import styles from "../Schedule.module.scss";
 import FullSchedule from "../fullSchedule/FullSchedule";
 import ScheduleFilters from "../filters/ScheduleFilters";
 import { scheduleEvents } from "../schedule.data";
@@ -9,6 +8,8 @@ import { clubList, IClub } from "../../home/fullmap/clubs.data";
 import { filterData, IFilter, IFilterOption } from "../filters/filters.data";
 import { configFilter } from "@/utility/configFilter";
 import { ScheduleEventType } from "@/types/fullCalendar.types";
+import styles from "../Schedule.module.scss";
+import cn from "classnames";
 
 const ScheduleDynScreen = ({ club_id }: { club_id: string }) => {
    const clubEvents = scheduleEvents.find((item) => item.club_id === club_id);
@@ -25,8 +26,10 @@ const ScheduleDynScreen = ({ club_id }: { club_id: string }) => {
          <div className="section">
             <div className={styles.head}>
                <div className="container">
-                  <div className="flex items-center justify-between">
-                     <div className="title-h1">Расписание тренировок TKD</div>
+                  <div className={styles["head-content"]}>
+                     <div className={cn("title-h1", styles["schedule-title"])}>
+                        Расписание тренировок {club.label}
+                     </div>
                      <ScheduleFilters
                         currentClub={clubOption}
                         setEvents={setEvents}

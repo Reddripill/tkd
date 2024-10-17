@@ -9,9 +9,7 @@ type ScheduleEventInfoType = {
 
 export type ScheduleEventInputType = EventInput &
    ScheduleEventInfoType &
-   Required<
-      Pick<EventInput, "id" | "title" | "start" | "startTime" | "endTime">
-   >;
+   Required<Pick<EventInput, "id" | "title" | "startTime" | "endTime">>;
 
 export type ScheduleEventType = {
    club_id: string;

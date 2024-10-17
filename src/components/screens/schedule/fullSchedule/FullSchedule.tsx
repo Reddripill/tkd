@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useLayoutEffect, useCallback } from "react";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import ruLocale from "@fullcalendar/core/locales/ru";
@@ -6,10 +6,13 @@ import FullScheduleEvent from "./FullScheduleEvent";
 import FullScheduleSlotLabel from "./FullScheduleSlotLabel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ScheduleEventInputType } from "@/types/fullCalendar.types";
+import { DayHeaderContentArg } from "@fullcalendar/core/index.js";
+import { transformWeekDay } from "@/utility/transformWeekDay";
 import "./FullSchedule.scss";
 
 const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
    const scheduleRef = useRef<FullCalendar>(null);
+   const [currentDay, setCurrentDay] = useState<Date | null>(null);
    const [eventSlotHeight, setEventSlotHeight] = useState(100);
    const EVENT_GAP = 8;
    const configCellHeight = () => {
@@ -43,9 +46,9 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
                });
             }
             if (width < 1024) {
-               calendarApi.changeView("timeGridSingleDay");
+               setCurrentDay(calendarApi.getDate());
             } else {
-               calendarApi.changeView("timeGridWeek");
+               setCurrentDay(null);
             }
          }
       }
@@ -58,7 +61,45 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
       const calendarApi = scheduleRef.current?.getApi();
       if (calendarApi) calendarApi.next();
    };
-
+   const handleDateClick = (date: Date) => {
+      if (typeof window !== undefined) {
+         const width = window.innerWidth;
+         if (width < 1024) {
+            setCurrentDay(date);
+         }
+      }
+   };
+   const renderDayHeaders = (arg: DayHeaderContentArg) => {
+      const text = arg.text;
+      const formatedText = text[0].toUpperCase() + text.slice(1);
+      return (
+         <div
+            key={arg.text}
+            className="fc-day-header"
+            onClick={() => handleDateClick(arg.date)}
+         >
+            {formatedText}
+         </div>
+      );
+   };
+   const filteredEvents = () => {
+      if (currentDay) {
+         return events.filter((item) => {
+            if (item.daysOfWeek) {
+               return (item.daysOfWeek as number[]).some(
+                  (day) =>
+                     day === transformWeekDay(new Date(currentDay).getDay())
+               );
+            } else if (item.start) {
+               return (
+                  new Date(item.start as string).toISOString().split("T")[0] ===
+                  new Date(currentDay).toISOString().split("T")[0]
+               );
+            }
+         });
+      }
+      return events;
+   };
    useLayoutEffect(() => {
       let throttled = false;
       const handleResize = () => {
@@ -104,13 +145,10 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
                );
             }}
             allDaySlot={false}
-            dayHeaderContent={(arg) => {
-               const text = arg.text;
-               return text[0].toUpperCase() + text.slice(1);
-            }}
+            dayHeaderContent={renderDayHeaders}
             slotMinTime="08:00"
             slotDuration="1:00:00"
-            events={events}
+            events={filteredEvents()}
             headerToolbar={false}
             eventContent={(event) => {
                return (
@@ -121,12 +159,6 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
                      {...event}
                   />
                );
-            }}
-            views={{
-               timeGridSingleDay: {
-                  type: "timeGrid",
-                  duration: { days: 1 },
-               },
             }}
          />
          <div

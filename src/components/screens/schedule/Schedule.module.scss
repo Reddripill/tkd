@@ -1,3 +1,7 @@
+.head-content {
+   @apply flex items-center justify-between flex-wrap
+   gap-x-16 gap-y-2 lg:mb-12 mb-6;
+}
 .text {
    @apply text-black font-bold;
 }
@@ -5,19 +9,27 @@
    @apply flex items-center gap-x-1;
 }
 .body {
-   @apply flex flex-col items-center mt-32 mb-48;
+   @apply flex flex-col items-center md:my-48
+   my-32;
 }
 .icon {
-   @apply mb-4 text-error;
+   @apply md:mb-4 mb-2 text-error;
+   & > svg {
+      @apply md:size-12 size-10;
+   }
 }
 .content {
    @apply text-center;
 }
+.schedule-title {
+   @apply mb-0 #{!important};
+}
 .title {
-   @apply font-bold text-2xl mb-1 tracking-wider;
+   @apply font-bold text-2xl mb-1 sm:tracking-wider
+   max-sm:text-xl;
 }
 .text {
-   @apply text-gray font-light tracking-wider;
+   @apply text-gray font-light sm:tracking-wider;
 }
 .button {
    @apply w-full h-11 flex-auto border-[2px] transition-colors

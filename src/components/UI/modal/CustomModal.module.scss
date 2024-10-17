@@ -1,7 +1,19 @@
 .wrapper {
-   @apply relative w-[730px] bg-white focus-visible:outline-none
-   p-10 rounded-main;
+   @apply w-full max-w-[730px] bg-white
+   focus-visible:outline-none md:p-10 sm:p-6
+   p-4 rounded-main mx-5 max-sm:mx-3;
+}
+.head {
+   @apply flex items-start justify-between md:mb-8
+   mb-4 gap-x-4;
+}
+.title {
+   @apply mb-0 max-sm:text-lg #{!important};
 }
 .close {
-   @apply absolute top-6 right-6 cursor-pointer p-2 bg-main;
+   @apply cursor-pointer p-1
+   bg-main;
+   & > svg {
+      @apply size-6;
+   }
 }
