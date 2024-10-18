@@ -7,12 +7,12 @@ import FullScheduleSlotLabel from "./FullScheduleSlotLabel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ScheduleEventInputType } from "@/types/fullCalendar.types";
 import { DayHeaderContentArg } from "@fullcalendar/core/index.js";
-import { transformWeekDay } from "@/utility/transformWeekDay";
 import "./FullSchedule.scss";
 
 const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
    const scheduleRef = useRef<FullCalendar>(null);
-   const [currentDay, setCurrentDay] = useState<Date | null>(null);
+   const [currentDay, setCurrentDay] = useState<string | null>(null);
+   const [newEvents, setNewEvents] = useState(events);
    const [eventSlotHeight, setEventSlotHeight] = useState(100);
    const EVENT_GAP = 8;
    const configCellHeight = () => {
@@ -27,7 +27,36 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
          }
       }
    };
-   const configCalendar = () => {
+   const filteredEvents = useCallback(
+      (day: string | null) => {
+         if (day) {
+            const currentWeekday = new Date(day).getDay();
+            const allFilteredEvents = events.filter((item) => {
+               if (item.daysOfWeek) {
+                  return (item.daysOfWeek as number[]).some(
+                     (day) => day === currentWeekday
+                  );
+               } else if (item.start) {
+                  return (
+                     new Date(item.start as string)
+                        .toISOString()
+                        .split("T")[0] ===
+                     new Date(day).toISOString().split("T")[0]
+                  );
+               }
+            });
+            return allFilteredEvents.map((event) => {
+               if (event.daysOfWeek) {
+                  return { ...event, daysOfWeek: [currentWeekday] };
+               }
+               return event;
+            });
+         }
+         return events;
+      },
+      [events]
+   );
+   const configCalendar = useCallback(() => {
       if (typeof window !== undefined) {
          const width = window.innerWidth;
          const calendarApi = scheduleRef.current?.getApi();
@@ -46,13 +75,16 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
                });
             }
             if (width < 1024) {
-               setCurrentDay(calendarApi.getDate());
+               const calendarCurrentDay = calendarApi.getDate().toString();
+               setCurrentDay(calendarCurrentDay);
+               setNewEvents(filteredEvents(calendarCurrentDay));
             } else {
                setCurrentDay(null);
+               setNewEvents(filteredEvents(null));
             }
          }
       }
-   };
+   }, [filteredEvents]);
    const handlePrevClick = () => {
       const calendarApi = scheduleRef.current?.getApi();
       if (calendarApi) calendarApi.prev();
@@ -65,7 +97,9 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
       if (typeof window !== undefined) {
          const width = window.innerWidth;
          if (width < 1024) {
-            setCurrentDay(date);
+            const calendarCurrentDay = date.toString();
+            setCurrentDay(calendarCurrentDay);
+            setNewEvents(filteredEvents(calendarCurrentDay));
          }
       }
    };
@@ -82,26 +116,9 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
          </div>
       );
    };
-   const filteredEvents = () => {
-      if (currentDay) {
-         return events.filter((item) => {
-            if (item.daysOfWeek) {
-               return (item.daysOfWeek as number[]).some(
-                  (day) =>
-                     day === transformWeekDay(new Date(currentDay).getDay())
-               );
-            } else if (item.start) {
-               return (
-                  new Date(item.start as string).toISOString().split("T")[0] ===
-                  new Date(currentDay).toISOString().split("T")[0]
-               );
-            }
-         });
-      }
-      return events;
-   };
    useLayoutEffect(() => {
       let throttled = false;
+      console.log("layout effect");
       const handleResize = () => {
          if (!throttled) {
             configCellHeight();
@@ -118,7 +135,7 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
       return () => {
          window.removeEventListener("resize", handleResize);
       };
-   }, []);
+   }, [configCalendar]);
    return (
       <div className="full-schedule">
          <FullCalendar
@@ -148,7 +165,7 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
             dayHeaderContent={renderDayHeaders}
             slotMinTime="08:00"
             slotDuration="1:00:00"
-            events={filteredEvents()}
+            events={newEvents}
             headerToolbar={false}
             eventContent={(event) => {
                return (
