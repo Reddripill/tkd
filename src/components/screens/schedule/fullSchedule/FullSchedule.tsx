@@ -1,4 +1,10 @@
-import React, { useState, useRef, useLayoutEffect, useCallback } from "react";
+import React, {
+   useState,
+   useRef,
+   useLayoutEffect,
+   useCallback,
+   useEffect,
+} from "react";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import ruLocale from "@fullcalendar/core/locales/ru";
@@ -7,6 +13,7 @@ import FullScheduleSlotLabel from "./FullScheduleSlotLabel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ScheduleEventInputType } from "@/types/fullCalendar.types";
 import { DayHeaderContentArg } from "@fullcalendar/core/index.js";
+import cn from "classnames";
 import "./FullSchedule.scss";
 
 const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
@@ -61,7 +68,14 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
          const width = window.innerWidth;
          const calendarApi = scheduleRef.current?.getApi();
          if (calendarApi) {
-            if (width < 1280) {
+            if (width >= 1280) {
+               calendarApi.setOption("dayHeaderFormat", {
+                  weekday: "long",
+                  day: "numeric",
+                  month: "2-digit",
+               });
+            }
+            if (width >= 1024) {
                calendarApi.setOption("dayHeaderFormat", {
                   weekday: "short",
                   day: "numeric",
@@ -69,15 +83,15 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
                });
             } else {
                calendarApi.setOption("dayHeaderFormat", {
-                  weekday: "long",
+                  weekday: "short",
                   day: "numeric",
-                  month: "2-digit",
                });
             }
             if (width < 1024) {
                const calendarCurrentDay = calendarApi.getDate().toString();
+               const mobileEvents = filteredEvents(calendarCurrentDay);
                setCurrentDay(calendarCurrentDay);
-               setNewEvents(filteredEvents(calendarCurrentDay));
+               setNewEvents(mobileEvents);
             } else {
                setCurrentDay(null);
                setNewEvents(filteredEvents(null));
@@ -106,19 +120,39 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
    const renderDayHeaders = (arg: DayHeaderContentArg) => {
       const text = arg.text;
       const formatedText = text[0].toUpperCase() + text.slice(1);
+      const formatedTextArr = formatedText.split(",");
+      const weekdayText = formatedTextArr[0]?.trim();
+      const dayText = formatedTextArr[1]?.trim();
+      const width = window.innerWidth;
+      const getCurrentDay = () => {
+         const colHeaderDate = arg.date.toDateString();
+         if (currentDay) {
+            return colHeaderDate === new Date(currentDay).toDateString();
+         } else {
+            return colHeaderDate === new Date().toDateString();
+         }
+      };
       return (
          <div
             key={arg.text}
-            className="fc-day-header"
+            className={cn("fc-day-header", {
+               ["fc-day-header-current"]: getCurrentDay(),
+            })}
             onClick={() => handleDateClick(arg.date)}
          >
-            {formatedText}
+            {width >= 1024 ? (
+               <>{formatedText}</>
+            ) : (
+               <div className="fc-col-header-day-cell">
+                  <div className="fc-col-header-weekday">{weekdayText}</div>
+                  <div className="fc-col-header-day">{dayText}</div>
+               </div>
+            )}
          </div>
       );
    };
    useLayoutEffect(() => {
       let throttled = false;
-      console.log("layout effect");
       const handleResize = () => {
          if (!throttled) {
             configCellHeight();
@@ -136,20 +170,32 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
          window.removeEventListener("resize", handleResize);
       };
    }, [configCalendar]);
+   useEffect(() => {
+      if (typeof window !== undefined) {
+         const width = window.innerWidth;
+         const calendarApi = scheduleRef.current?.getApi();
+         const contentHeight =
+            newEvents.length * eventSlotHeight +
+            (newEvents.length - 1) * EVENT_GAP +
+            150;
+         if (calendarApi) {
+            if (width < 1024) {
+               calendarApi.setOption("height", undefined);
+               calendarApi.setOption("contentHeight", contentHeight);
+            } else {
+               calendarApi.setOption("height", "auto");
+            }
+         }
+      }
+   }, [newEvents, eventSlotHeight]);
    return (
       <div className="full-schedule">
          <FullCalendar
             ref={scheduleRef}
-            height="auto"
             eventMinHeight={eventSlotHeight}
             plugins={[timeGridPlugin]}
             initialView="timeGridWeek"
             locale={ruLocale}
-            dayHeaderFormat={{
-               weekday: "long",
-               day: "numeric",
-               month: "2-digit",
-            }}
             slotLabelFormat={{ hour: "2-digit", minute: "2-digit" }}
             slotLabelContent={(event) => {
                return (
@@ -167,28 +213,50 @@ const FullSchedule = ({ events }: { events: ScheduleEventInputType[] }) => {
             slotDuration="1:00:00"
             events={newEvents}
             headerToolbar={false}
+            /* eventClassNames={(event) => {
+               const daysOfWeek = event.event.extendedProps.daysOfWeek;
+               if (currentDay) {
+                  let isCurrentDay = false;
+                  if (daysOfWeek) {
+                     isCurrentDay = (daysOfWeek as number[]).some(
+                        (day) => day === new Date(currentDay).getDay()
+                     );
+                  } else if (event.event.start) {
+                     isCurrentDay =
+                        new Date(event.event.start)
+                           .toISOString()
+                           .split("T")[0] ===
+                        new Date(currentDay).toISOString().split("T")[0];
+                  }
+                  return isCurrentDay ? "fc-day-current" : "";
+               }
+               return "";
+            }} */
             eventContent={(event) => {
                return (
                   <FullScheduleEvent
                      gap={EVENT_GAP}
                      eventSlotHeight={eventSlotHeight}
-                     schedule={events}
+                     schedule={newEvents}
+                     isMobile={!!currentDay}
                      {...event}
                   />
                );
             }}
          />
-         <div
-            className="fc-schedule-button fc-schedule-button__prev"
-            onClick={handlePrevClick}
-         >
-            <ChevronLeft size={24} />
-         </div>
-         <div
-            className="fc-schedule-button fc-schedule-button__next"
-            onClick={handleNextClick}
-         >
-            <ChevronRight size={24} />
+         <div className="fc-schedule-manipulate">
+            <div
+               className="fc-schedule-button fc-schedule-button__prev"
+               onClick={handlePrevClick}
+            >
+               <ChevronLeft size={24} />
+            </div>
+            <div
+               className="fc-schedule-button fc-schedule-button__next"
+               onClick={handleNextClick}
+            >
+               <ChevronRight size={24} />
+            </div>
          </div>
       </div>
    );

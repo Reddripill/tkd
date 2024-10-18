@@ -7,6 +7,7 @@ interface IProps extends EventContentArg {
    schedule: ScheduleEventInputType[];
    eventSlotHeight: number;
    gap: number;
+   isMobile: boolean;
 }
 
 const FullScheduleEvent = ({
@@ -14,20 +15,23 @@ const FullScheduleEvent = ({
    event,
    schedule,
    eventSlotHeight,
+   isMobile,
    gap,
 }: IProps) => {
    const getTop = () => {
-      const currentEventStart = timeText.split("-")[0].trim();
-      const sortedSchedule = schedule.filter(
-         (item) =>
-            transformTime(item.startTime) === transformTime(currentEventStart)
-      );
-      const index = sortedSchedule.findIndex((item) => item.id === event.id);
-      if (index > 0) {
-         return index * (eventSlotHeight + gap);
+      let index: number = 0;
+      if (!isMobile) {
+         const currentEventStart = timeText.split("-")[0].trim();
+         const sortedSchedule = schedule.filter(
+            (item) =>
+               transformTime(item.startTime) ===
+               transformTime(currentEventStart)
+         );
+         index = sortedSchedule.findIndex((item) => item.id === event.id);
       } else {
-         return 0;
+         index = schedule.findIndex((item) => item.id === event.id);
       }
+      return index > 0 ? index * (eventSlotHeight + gap) : 0;
    };
    return (
       <div

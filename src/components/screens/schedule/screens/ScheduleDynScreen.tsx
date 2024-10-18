@@ -41,7 +41,7 @@ const ScheduleDynScreen = ({ club_id }: { club_id: string }) => {
                   </div>
                </div>
             </div>
-            <div className="mx-2">
+            <div className="lg:mx-2 mx-4">
                <FullSchedule events={events.events} />
             </div>
          </div>
