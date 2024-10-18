@@ -15,9 +15,9 @@
    transition-colors focus:border-darkBlue outline-none;
 }
 .button {
-   @apply text-center bg-darkBlue rounded-md h-9 w-full
-   text-white mt-4 transition-colors hover:bg-darkBlue/80
-   disabled:bg-darkBlue/80;
+   @apply text-center bg-lightBlue rounded-md h-9 w-full
+   text-white mt-4 transition-colors hover:bg-lightBlue/80
+   disabled:bg-lightBlue/80;
 }
 .error {
    @apply text-xs text-red-600 font-bold mt-[2px];

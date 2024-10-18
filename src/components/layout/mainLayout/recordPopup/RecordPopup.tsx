@@ -1,13 +1,19 @@
 "use client";
 import React from "react";
-import Popup, { IPopupProps } from "@/components/UI/popup/Popup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IRecord, recordSchema } from "./record.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import styles from "./RecordPopup.module.scss";
 import cn from "classnames";
+import CustomModal from "@/components/UI/modal/CustomModal";
+import { SetStateType } from "@/types/main.types";
 
-const RecordPopup = (props: IPopupProps) => {
+interface IProps {
+   isOpen: boolean;
+   setIsOpen: SetStateType<boolean>;
+}
+
+const RecordPopup = ({ isOpen, setIsOpen }: IProps) => {
    const {
       register,
       handleSubmit,
@@ -17,10 +23,14 @@ const RecordPopup = (props: IPopupProps) => {
       mode: "onTouched",
    });
    const onSubmitHandler: SubmitHandler<IRecord> = () => {
-      props.setIsOpen(false);
+      setIsOpen(false);
    };
    return (
-      <Popup {...props}>
+      <CustomModal
+         title="Записаться на занятия"
+         isOpen={isOpen}
+         setIsOpen={setIsOpen}
+      >
          <form onSubmit={handleSubmit(onSubmitHandler)}>
             <div
                className={cn(styles.field, {
@@ -61,7 +71,7 @@ const RecordPopup = (props: IPopupProps) => {
                Записаться
             </button>
          </form>
-      </Popup>
+      </CustomModal>
    );
 };
 
