@@ -1,20 +1,16 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
-import { createPortal } from "react-dom";
+import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import Burger from "@/components/UI/burger/Burger";
 import Link from "next/link";
 import cn from "classnames";
 import styles from "./Header.module.scss";
 import Image from "next/image";
-import { removeScrollbar, restoreScrollbar } from "@/utility/manageScrollbar";
-
-const RecordPopup = dynamic(() => import("../recordPopup/RecordPopup"));
+import { restoreScrollbar } from "@/utility/manageScrollbar";
+import RecordPopup from "../recordPopup/RecordPopup";
 
 const Header = () => {
    const [isShow, setIsShow] = useState(false);
-   const [isMounted, setIsMounted] = useState(false);
    const [isPopupOpen, setIsPopupOpen] = useState(false);
    const pathname = usePathname();
    const closeMenu = () => {
@@ -28,13 +24,6 @@ const Header = () => {
          behavior: "smooth",
       });
    };
-   const showPopupHandler = () => {
-      removeScrollbar(() => setIsPopupOpen(true));
-   };
-   useEffect(() => {
-      setIsMounted(true);
-      return () => setIsMounted(false);
-   }, []);
    return (
       <header className={styles.header}>
          <div className={styles.wrapper}>
@@ -102,22 +91,23 @@ const Header = () => {
                            </button>
                         </nav>
                      </menu>
-                     <button
-                        onClick={showPopupHandler}
-                        className={styles.button}
-                     >
-                        Записаться
-                     </button>
+                     <div>
+                        <button
+                           onClick={() => setIsPopupOpen(true)}
+                           className={styles.button}
+                        >
+                           Записаться
+                        </button>
+                        <RecordPopup
+                           isOpen={isPopupOpen}
+                           setIsOpen={setIsPopupOpen}
+                        />
+                     </div>
                      <Burger isShow={isShow} setIsShow={setIsShow} />
                   </div>
                </div>
             </div>
          </div>
-         {isMounted &&
-            createPortal(
-               <RecordPopup isOpen={isPopupOpen} setIsOpen={setIsPopupOpen} />,
-               document.body
-            )}
       </header>
    );
 };
