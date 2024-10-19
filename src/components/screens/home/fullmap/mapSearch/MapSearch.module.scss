@@ -6,10 +6,10 @@
    @apply px-5 py-8;
 }
 .search {
-   @apply relative mb-6;
+   @apply relative md:mb-6 mb-3;
 }
 .info {
-   @apply mb-10;
+   @apply md:mb-10 mb-6;
 }
 .contacts {
    @apply relative pt-6;

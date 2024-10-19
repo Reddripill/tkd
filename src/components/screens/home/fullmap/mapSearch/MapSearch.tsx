@@ -4,16 +4,18 @@ import Link from "next/link";
 import { MoveRight } from "lucide-react";
 import { TextField, Autocomplete } from "@mui/material";
 import { clubList, IClub } from "../clubs.data";
+import cn from "classnames";
 
 interface IProps<T = IClub> {
    value: T;
    handleChangeValue: (val: IClub) => void;
+   className?: string;
 }
 
-const MapSearch = ({ value, handleChangeValue }: IProps) => {
+const MapSearch = ({ value, handleChangeValue, className }: IProps) => {
    return (
-      <div className={styles.wrapper}>
-         <div className={styles.container}>
+      <div className={cn(styles.wrapper, className)}>
+         <div className={cn(styles.container, className)}>
             <div className={styles.search}>
                <Autocomplete
                   value={value}
@@ -51,7 +53,7 @@ const MapSearch = ({ value, handleChangeValue }: IProps) => {
             {value && (
                <div className={styles.club}>
                   <div className={styles.info}>
-                     <div className="mb-6">
+                     <div className="md:mb-6 mb-3">
                         <div className={styles.title}>{value.label}</div>
                         <div className={styles.adress}>{value.adress}</div>
                      </div>
@@ -70,7 +72,7 @@ const MapSearch = ({ value, handleChangeValue }: IProps) => {
                   md:px-4 px-2 md:h-10 h-8 transition-colors hover:bg-transparent border-2
                   border-darkBlue flex items-center gap-x-2 hover:text-darkBlue"
                   >
-                     <Link href="/">Расписание</Link>
+                     <Link href={`/schedule/${value.id}`}>Расписание</Link>
                      <MoveRight />
                   </button>
                </div>
