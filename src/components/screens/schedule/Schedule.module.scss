@@ -31,8 +31,3 @@
 .text {
    @apply text-gray font-light sm:tracking-wider;
 }
-.button {
-   @apply w-full h-11 flex-auto border-[2px] transition-colors
-   text-darkBlue border-darkBlue font-bold
-   hover:bg-darkBlue hover:text-white;
-}

@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 import { MapPin } from "lucide-react";
 import CustomModal from "@/components/UI/modal/CustomModal";
-import styles from "./Schedule.module.scss";
 import { Autocomplete, TextField } from "@mui/material";
-import { clubList, IClub } from "../home/fullmap/clubs.data";
+import styles from "./ClubSelect.module.scss";
+import { clubList, IClub } from "@/components/screens/home/fullmap/clubs.data";
 import { usePathname, useRouter } from "next/navigation";
 
-const ScheduleSelect = () => {
+const ClubSelect = () => {
    const router = useRouter();
    const pathname = usePathname();
    const [isOpen, setIsOpen] = useState(false);
    const handleOpen = () => setIsOpen(true);
    const [value, setValue] = useState<IClub>(clubList[0]);
-   const handleClose = () => setIsOpen(false);
+   const handleClose = () => {
+      setIsOpen(false);
+      router.push(`${pathname}/${value.id}`);
+   };
    const handleChangeValue = (val: IClub) => {
       setValue(val);
-   };
-   const handleClick = () => {
-      handleClose();
-      router.push(`${pathname}/${value.id}`);
    };
    return (
       <>
@@ -30,7 +29,6 @@ const ScheduleSelect = () => {
             title="Выберите клуб"
             isOpen={isOpen}
             setIsOpen={setIsOpen}
-            className=""
          >
             <div>
                <Autocomplete
@@ -65,7 +63,7 @@ const ScheduleSelect = () => {
                <button
                   type="button"
                   className={styles.button}
-                  onClick={handleClick}
+                  onClick={handleClose}
                >
                   Применить
                </button>
@@ -75,4 +73,4 @@ const ScheduleSelect = () => {
    );
 };
 
-export default ScheduleSelect;
+export default ClubSelect;

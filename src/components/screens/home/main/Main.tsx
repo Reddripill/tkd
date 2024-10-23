@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Main.module.scss";
-import Image from "next/image";
 import cn from "classnames";
 import Link from "next/link";
+import MainBg from "./MainBg";
 
 const Main = () => {
    return (
@@ -28,14 +28,7 @@ const Main = () => {
                   <Link href="/record">Узнать больше</Link>
                </button>
             </div>
-            <Image
-               src="/mainBg.jpg"
-               alt="Main Background"
-               className={styles.back}
-               style={{ objectFit: "cover" }}
-               fill
-            />
-            <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-10" />
+            <MainBg />
          </div>
       </section>
    );

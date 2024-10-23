@@ -1,6 +1,6 @@
 "use client";
 import React, { useLayoutEffect, useState, useRef, useCallback } from "react";
-import { Clusterer, Map, Placemark } from "@pbe/react-yandex-maps";
+import { Clusterer, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import MapSearch from "./mapSearch/MapSearch";
 import styles from "./FullMap.module.scss";
 import { clubList, IClub } from "./clubs.data";
@@ -89,6 +89,7 @@ const YMap = () => {
                   />
                ))}
             </Clusterer>
+            <ZoomControl options={{ position: { top: "50%", right: "0px" } }} />
             {!isMobile && (
                <MapSearch value={value} handleChangeValue={handleChangeValue} />
             )}

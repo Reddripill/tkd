@@ -1,28 +1,24 @@
 "use client";
 import React from "react";
-import styles from "../Schedule.module.scss";
-import ScheduleEmpty from "../ScheduleEmpty";
-import cn from "classnames";
+import styles from "./StructureScreen.module.scss";
 import ClubSelect from "@/components/UI/select/ClubSelect";
 
-const ScheduleScreen = () => {
+const StructureScreen = () => {
    return (
       <div className="screen">
          <div className="section">
             <div className={styles.head}>
                <div className="container">
                   <div className={styles["head-content"]}>
-                     <div className={cn("title-h1", styles["schedule-title"])}>
-                        Расписание тренировок
-                     </div>
+                     <div className="title-h1">Структура организации</div>
                      <ClubSelect />
                   </div>
                </div>
             </div>
-            <ScheduleEmpty text="Выберите нужный клуб" />
+            <div></div>
          </div>
       </div>
    );
 };
 
-export default ScheduleScreen;
+export default StructureScreen;
