@@ -5,16 +5,23 @@ import { Autocomplete, TextField } from "@mui/material";
 import styles from "./ClubSelect.module.scss";
 import { clubList, IClub } from "@/components/screens/home/fullmap/clubs.data";
 import { usePathname, useRouter } from "next/navigation";
+import { SetStateType } from "@/types/main.types";
 
-const ClubSelect = () => {
+interface IProps {
+   value: IClub;
+   setValue: SetStateType<IClub>;
+}
+
+const ClubSelect = ({ value, setValue }: IProps) => {
    const router = useRouter();
    const pathname = usePathname();
    const [isOpen, setIsOpen] = useState(false);
    const handleOpen = () => setIsOpen(true);
-   const [value, setValue] = useState<IClub>(clubList[0]);
+   // const [value, setValue] = useState<IClub>(clubList[0]);
    const handleClose = () => {
+      const basePath = pathname.split("/").slice(0, 2).join("/");
       setIsOpen(false);
-      router.push(`${pathname}/${value.id}`);
+      router.push(`${basePath}/${value.id}`);
    };
    const handleChangeValue = (val: IClub) => {
       setValue(val);

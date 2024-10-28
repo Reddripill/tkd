@@ -1,0 +1,19 @@
+.card {
+   @apply w-full max-w-[300px] cursor-pointer relative shadow-header
+   scale-100 z-0 transition-all;
+}
+.card_hovered {
+   @apply scale-[1.2] z-10;
+}
+.image {
+   @apply pb-[110%] relative;
+}
+.content {
+   @apply bg-white p-6 text-center;
+}
+.role {
+   @apply tracking-widest;
+}
+.fullname {
+   @apply text-lg font-bold;
+}

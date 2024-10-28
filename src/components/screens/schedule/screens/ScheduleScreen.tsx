@@ -1,11 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styles from "../Schedule.module.scss";
 import ScheduleEmpty from "../ScheduleEmpty";
 import cn from "classnames";
 import ClubSelect from "@/components/UI/select/ClubSelect";
+import { clubList, IClub } from "../../home/fullmap/clubs.data";
 
 const ScheduleScreen = () => {
+   const [value, setValue] = useState<IClub>(clubList[0]);
    return (
       <div className="screen">
          <div className="section">
@@ -15,7 +17,7 @@ const ScheduleScreen = () => {
                      <div className={cn("title-h1", styles["schedule-title"])}>
                         Расписание тренировок
                      </div>
-                     <ClubSelect />
+                     <ClubSelect value={value} setValue={setValue} />
                   </div>
                </div>
             </div>
