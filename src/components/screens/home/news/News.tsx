@@ -3,7 +3,6 @@ import React from "react";
 import Cart from "../cart/Cart";
 import { cartData } from "../cart/cart.data";
 import Slider from "@/components/UI/slider/Slider";
-import styles from "./News.module.scss";
 
 const News = () => {
    return (

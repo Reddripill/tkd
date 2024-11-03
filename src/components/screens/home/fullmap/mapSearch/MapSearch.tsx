@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./MapSearch.module.scss";
 import Link from "next/link";
 import { MoveRight } from "lucide-react";
-import { TextField, Autocomplete } from "@mui/material";
 import { clubList, IClub } from "../clubs.data";
 import cn from "classnames";
+import AutoComplete from "@/components/UI/autocomplete/Autocomplete";
 
 interface IProps<T = IClub> {
    value: T;
@@ -17,37 +17,11 @@ const MapSearch = ({ value, handleChangeValue, className }: IProps) => {
       <div className={cn(styles.wrapper, className)}>
          <div className={cn(styles.container, className)}>
             <div className={styles.search}>
-               <Autocomplete
+               <div className={styles["select-label"]}>Выберите клуб</div>
+               <AutoComplete
                   value={value}
-                  onChange={(e: any, newValue: IClub) => {
-                     if (newValue) handleChangeValue(newValue);
-                  }}
-                  disablePortal
-                  fullWidth
-                  clearOnBlur
-                  handleHomeEndKeys
+                  handleChangeValue={handleChangeValue}
                   options={clubList}
-                  closeText=""
-                  openText=""
-                  disableClearable={true}
-                  sx={{
-                     fontSize: "14px",
-                     "& .MuiInputBase-input": {
-                        paddingLeft: "4px !important",
-                        fontSize: "14px",
-                     },
-                     "& .MuiFormLabel-root": { fontSize: "14px" },
-                     "& + .MuiPopper-root .MuiAutocomplete-option": {
-                        fontSize: "14px",
-                     },
-                  }}
-                  renderInput={(params) => (
-                     <TextField
-                        {...params}
-                        size="small"
-                        label="Выберите клуб"
-                     />
-                  )}
                />
             </div>
             {value && (

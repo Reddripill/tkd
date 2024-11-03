@@ -2,7 +2,8 @@
    @apply relative;
 }
 .content {
-   @apply relative lg:py-60 sm:py-20 py-10 sm:px-[10%] px-[5%] z-20;
+   @apply relative lg:py-60 sm:py-20 py-10
+   z-20 max-w-[1410px] px-[15px] mx-auto;
 }
 .title {
    @apply text-white max-w-[400px];

@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./Cart.module.scss";
 import { ICartData } from "./cart.data";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "./Cart.module.scss";
 import cn from "classnames";
 
 interface IProps extends ICartData {

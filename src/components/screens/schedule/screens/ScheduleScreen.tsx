@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import styles from "../Schedule.module.scss";
 import ScheduleEmpty from "../ScheduleEmpty";
 import cn from "classnames";
-import ClubSelect from "@/components/UI/select/ClubSelect";
 import { clubList, IClub } from "../../home/fullmap/clubs.data";
+import ClubModal from "@/components/UI/modal/ClubModal";
 
 const ScheduleScreen = () => {
    const [value, setValue] = useState<IClub>(clubList[0]);
@@ -17,7 +17,7 @@ const ScheduleScreen = () => {
                      <div className={cn("title-h1", styles["schedule-title"])}>
                         Расписание тренировок
                      </div>
-                     <ClubSelect value={value} setValue={setValue} />
+                     <ClubModal value={value} setValue={setValue} />
                   </div>
                </div>
             </div>

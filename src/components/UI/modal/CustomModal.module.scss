@@ -17,3 +17,12 @@
       @apply size-6;
    }
 }
+
+.filter {
+   @apply flex items-center gap-x-1;
+}
+.button {
+   @apply w-full h-11 flex-auto border-[2px] transition-colors
+   text-darkBlue border-darkBlue font-bold
+   hover:bg-darkBlue hover:text-white;
+}

@@ -22,8 +22,8 @@ const Main = () => {
                </div>
                <button
                   className="text-white md:text-base text-sm font-bold bg-darkBlue
-            md:px-6 px-4 md:h-12 h-10 transition-colors hover:bg-transparent border-4
-            border-darkBlue"
+                  md:px-6 px-4 md:h-12 h-10 transition-colors hover:bg-transparent border-4
+                  border-darkBlue"
                >
                   <Link href="/record">Узнать больше</Link>
                </button>

@@ -32,36 +32,38 @@ const RecordPopup = ({ isOpen, setIsOpen }: IProps) => {
          setIsOpen={setIsOpen}
       >
          <form onSubmit={handleSubmit(onSubmitHandler)}>
-            <div
-               className={cn(styles.field, {
-                  [styles._error]: errors.name,
-               })}
-            >
-               <div className={styles.label}>Введите имя</div>
-               <input
-                  type="text"
-                  className={styles.input}
-                  {...register("name")}
-               />
-               {errors.name && (
-                  <p className={styles.error}>{errors.name.message}</p>
-               )}
-            </div>
-            <div
-               className={cn(styles.field, {
-                  [styles._error]: errors.email,
-               })}
-            >
-               <div className={styles.label}>Введите почту</div>
-               <input
-                  type="email"
-                  autoFocus={false}
-                  className={styles.input}
-                  {...register("email")}
-               />
-               {errors.email && (
-                  <p className={styles.error}>{errors.email.message}</p>
-               )}
+            <div className={styles.fields}>
+               <div
+                  className={cn(styles.field, {
+                     [styles._error]: errors.name,
+                  })}
+               >
+                  <div className={styles.label}>Введите имя</div>
+                  <input
+                     type="text"
+                     className={styles.input}
+                     {...register("name")}
+                  />
+                  {errors.name && (
+                     <p className={styles.error}>{errors.name.message}</p>
+                  )}
+               </div>
+               <div
+                  className={cn(styles.field, {
+                     [styles._error]: errors.email,
+                  })}
+               >
+                  <div className={styles.label}>Введите почту</div>
+                  <input
+                     type="email"
+                     autoFocus={false}
+                     className={styles.input}
+                     {...register("email")}
+                  />
+                  {errors.email && (
+                     <p className={styles.error}>{errors.email.message}</p>
+                  )}
+               </div>
             </div>
             <button
                type="submit"

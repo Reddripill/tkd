@@ -8,6 +8,9 @@
 .search {
    @apply relative md:mb-6 mb-3;
 }
+.select-label {
+   @apply font-medium mb-2 text-sm sm:text-base;
+}
 .info {
    @apply md:mb-10 mb-6;
 }

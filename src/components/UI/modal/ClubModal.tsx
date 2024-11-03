@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import { MapPin } from "lucide-react";
 import CustomModal from "@/components/UI/modal/CustomModal";
-import { Autocomplete, TextField } from "@mui/material";
-import styles from "./ClubSelect.module.scss";
+import styles from "./CustomModal.module.scss";
 import { clubList, IClub } from "@/components/screens/home/fullmap/clubs.data";
 import { usePathname, useRouter } from "next/navigation";
 import { SetStateType } from "@/types/main.types";
+import AutoComplete from "../autocomplete/Autocomplete";
 
 interface IProps {
    value: IClub;
    setValue: SetStateType<IClub>;
 }
 
-const ClubSelect = ({ value, setValue }: IProps) => {
+const ClubModal = ({ value, setValue }: IProps) => {
    const router = useRouter();
    const pathname = usePathname();
    const [isOpen, setIsOpen] = useState(false);
    const handleOpen = () => setIsOpen(true);
-   // const [value, setValue] = useState<IClub>(clubList[0]);
    const handleClose = () => {
       const basePath = pathname.split("/").slice(0, 2).join("/");
       setIsOpen(false);
@@ -37,36 +36,14 @@ const ClubSelect = ({ value, setValue }: IProps) => {
             isOpen={isOpen}
             setIsOpen={setIsOpen}
          >
-            <div>
-               <Autocomplete
+            <div className="mb-6">
+               <AutoComplete
                   value={value}
-                  onChange={(e: any, newValue: IClub) => {
-                     if (newValue) handleChangeValue(newValue);
-                  }}
-                  disablePortal
-                  fullWidth
-                  clearOnBlur
-                  handleHomeEndKeys
+                  handleChangeValue={handleChangeValue}
                   options={clubList}
-                  closeText=""
-                  openText=""
-                  disableClearable={true}
-                  sx={{
-                     fontSize: "14px",
-                     height: "54px",
-                     "& .MuiInputBase-input": {
-                        paddingLeft: "4px !important",
-                        fontSize: "14px",
-                     },
-                     "& .MuiFormLabel-root": { fontSize: "14px" },
-                     "& + .MuiPopper-root .MuiAutocomplete-option": {
-                        fontSize: "14px",
-                     },
-                  }}
-                  renderInput={(params) => (
-                     <TextField {...params} size="small" />
-                  )}
                />
+            </div>
+            <div>
                <button
                   type="button"
                   className={styles.button}
@@ -80,4 +57,4 @@ const ClubSelect = ({ value, setValue }: IProps) => {
    );
 };
 
-export default ClubSelect;
+export default ClubModal;

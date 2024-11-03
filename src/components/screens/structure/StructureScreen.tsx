@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import ClubSelect from "@/components/UI/select/ClubSelect";
+import ClubSelect from "@/components/UI/modal/ClubModal";
 import { IStrucure, structureData } from "./structure.data";
 import Card from "@/components/UI/card/Card";
 import styles from "./StructureScreen.module.scss";

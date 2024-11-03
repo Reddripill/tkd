@@ -11,14 +11,14 @@ export const structureData: IStrucure[] = [
       id: 1,
       club_id: "tkd",
       fullname: "Батталов Артур",
-      role: "founder",
+      role: "Основатель",
       image: "/coach.jpg",
    },
    {
       id: 1,
       club_id: "tkd",
       fullname: "Батталов Артур",
-      role: "coach",
+      role: "Тренер",
       image: "/coach.jpg",
    },
 ];

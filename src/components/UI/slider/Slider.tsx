@@ -2,19 +2,25 @@
 import React, { useRef, HTMLAttributes } from "react";
 import SlickSlider, { Settings } from "react-slick";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import cn from "classnames";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Slider.scss";
 
-const PrevArrow: React.FC<HTMLAttributes<HTMLDivElement>> = (attr) => {
+interface IArrowProps extends HTMLAttributes<HTMLDivElement> {
+   className?: string;
+}
+
+const PrevArrow: React.FC<IArrowProps> = (attr) => {
+   console.log(attr.className);
    return (
-      <div className="prev-arrow" {...attr}>
+      <div className={cn("prev-arrow")} {...attr}>
          <ChevronLeft className="slider-arrow" color="#000" />
       </div>
    );
 };
 
-const NextArrow: React.FC<HTMLAttributes<HTMLDivElement>> = (attr) => {
+const NextArrow: React.FC<IArrowProps> = ({ className, ...attr }) => {
    return (
       <div className="next-arrow" {...attr}>
          <ChevronRight className="slider-arrow" color="#000" />
