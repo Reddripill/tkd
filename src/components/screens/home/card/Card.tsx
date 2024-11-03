@@ -1,15 +1,15 @@
 import React from "react";
-import { ICartData } from "./cart.data";
+import { ICartData } from "./card.data";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./Cart.module.scss";
+import styles from "./Card.module.scss";
 import cn from "classnames";
 
 interface IProps extends ICartData {
    className?: string;
 }
 
-const Cart = ({ date, image, text, title, alt, className }: IProps) => {
+const Card = ({ date, image, text, title, alt, className }: IProps) => {
    return (
       <div className={cn(styles.cart, className)}>
          <div className="relative w-full pb-[80%]">
@@ -31,4 +31,4 @@ const Cart = ({ date, image, text, title, alt, className }: IProps) => {
    );
 };
 
-export default Cart;
+export default Card;

@@ -8,10 +8,10 @@ const MainBg = () => {
    return (
       <Parallax>
          <Image
-            src="/mainBg.jpg"
+            src="/1.jpg"
             alt="Main Background"
             className={styles.back}
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "cover", objectPosition: "top" }}
             fill
          />
          <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-10" />

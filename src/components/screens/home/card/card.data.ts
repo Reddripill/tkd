@@ -7,7 +7,7 @@ export interface ICartData {
    id: string;
 }
 
-export const cartData: ICartData[] = [
+export const cardData: ICartData[] = [
    {
       id: "1",
       image: "/cart_1.png",

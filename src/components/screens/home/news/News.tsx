@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import Cart from "../cart/Cart";
-import { cartData } from "../cart/cart.data";
+import Card from "../card/Card";
+import { cardData } from "../card/card.data";
 import Slider from "@/components/UI/slider/Slider";
 
 const News = () => {
@@ -10,8 +10,8 @@ const News = () => {
          <div className="container">
             <div className="title-h1">Актуальные новости</div>
             <Slider>
-               {cartData.map((cart) => (
-                  <Cart key={cart.id} {...cart} />
+               {cardData.map((card) => (
+                  <Card key={card.id} {...card} />
                ))}
             </Slider>
          </div>

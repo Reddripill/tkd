@@ -9,7 +9,7 @@ import {
    UpdateManyParams,
    UpdateManyResult,
 } from "react-admin";
-import { cartData, ICartData } from "@/components/screens/home/cart/cart.data";
+import { cartData, ICartData } from "@/components/screens/home/card/card.data";
 
 let cartItems: ICartData[] = [...cartData];
 

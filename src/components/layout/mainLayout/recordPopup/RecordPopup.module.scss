@@ -19,7 +19,7 @@
 }
 .button {
    @apply w-full h-11 flex-auto border-[2px] transition-colors
-   text-darkBlue border-darkBlue font-bold
+   text-darkBlue border-darkBlue font-bold cursor-pointer
    hover:bg-darkBlue hover:text-white;
 }
 .error {
