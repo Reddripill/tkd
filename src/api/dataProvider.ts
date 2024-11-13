@@ -1,4 +1,5 @@
 // src/app/admin/dataProvider.ts
+import { cardData, ICardData } from "@/components/screens/home/card/card.data";
 import {
    DataProvider,
    GetListResult,
@@ -9,9 +10,8 @@ import {
    UpdateManyParams,
    UpdateManyResult,
 } from "react-admin";
-import { cartData, ICartData } from "@/components/screens/home/card/card.data";
 
-let cartItems: ICartData[] = [...cartData];
+let cartItems: ICardData[] = [...cardData];
 
 const dataProvider: DataProvider = {
    getList: <RecordType extends RaRecord>(
@@ -37,7 +37,7 @@ const dataProvider: DataProvider = {
       return Promise.resolve({ data: items as unknown as RecordType[] });
    },
    create: <RecordType extends RaRecord>(resource: string, params: any) => {
-      const newItem: ICartData = {
+      const newItem: ICardData = {
          ...params.data,
          id: cartItems.length ? cartItems[cartItems.length - 1].id + 1 : 1,
       };

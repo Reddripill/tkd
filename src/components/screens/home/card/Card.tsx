@@ -1,11 +1,11 @@
 import React from "react";
-import { ICartData } from "./card.data";
+import { ICardData } from "./card.data";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Card.module.scss";
 import cn from "classnames";
 
-interface IProps extends ICartData {
+interface IProps extends ICardData {
    className?: string;
 }
 
